@@ -1,0 +1,9 @@
+Task: remove 'narcissistic' elements from an array. 
+
+A narcissistic element is defined as an element which is larger than
+the average of its two neighbours (the array is cyclic).
+
+You may assume the array has at least three elements.
+
+
+https://codegolf.stackexchange.com/questions/144358/narcissistic-array-elements
