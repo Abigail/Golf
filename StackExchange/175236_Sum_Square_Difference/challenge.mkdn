@@ -1,0 +1,29 @@
+Sum square difference
+=====================
+
+The sum of the squares of the first ten natural numbers is,
+1&#xB2;+2&#xB2;+ ... +10&#xB2; = 385.
+
+The square of the sum of the first ten natural numbers is,
+
+(1 + 2 + ... + 10)&##xB2; = 55&B#xB2; = 3025
+
+Hence the difference between the sum of the squares of the first
+ten natural numbers and the square of the sum is
+
+3025 - 385 = 2640
+
+For a given input n, find the difference between the sum of the
+squares of the first n natural numbers and the square of the sum.
+
+Test cases
+----------
+
+1   => 0
+2   => 4
+3   => 22
+10  => 2640
+24  => 85100
+100 => 25164150
+
+https://codegolf.stackexchange.com/questions/175236/sum-square-difference/175262#175262

@@ -1,0 +1,11 @@
+<code>
+&#x2211;<sub>k=1</sub><sup>n</sup>k = n (n + 1) / 2
+</code>
+
+<code>
+&#x2211;<sub>k=1</sub><sup>n</sup>k&#xB2; = n (n + 1) (2n + 1) / 6
+</code>
+
+<code>
+(&#x2211;<sub>k=1</sub><sup>n</sup>k)&#xB2; - &#x2211;<sub>k=1</sub><sup>n</sup>k&#xB2; = (3n&#x2074; + 2n&#xB3; - 3n&#xB2; - 2n) / 12
+</code>
