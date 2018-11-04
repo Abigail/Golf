@@ -6,7 +6,7 @@ The sum of the squares of the first ten natural numbers is,
 
 The square of the sum of the first ten natural numbers is,
 
-(1 + 2 + ... + 10)&##xB2; = 55&B#xB2; = 3025
+(1 + 2 + ... + 10)&#xB2; = 55&#xB2; = 3025
 
 Hence the difference between the sum of the squares of the first
 ten natural numbers and the square of the sum is
@@ -19,11 +19,11 @@ squares of the first n natural numbers and the square of the sum.
 Test cases
 ----------
 
-1   => 0
-2   => 4
-3   => 22
-10  => 2640
-24  => 85100
-100 => 25164150
+    1   => 0
+    2   => 4
+    3   => 22
+    10  => 2640
+    24  => 85100
+    100 => 25164150
 
 https://codegolf.stackexchange.com/questions/175236/sum-square-difference/175262#175262
