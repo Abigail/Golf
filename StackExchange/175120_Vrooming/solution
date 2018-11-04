@@ -1,0 +1,1 @@
+perl -nE'$s=length$1if/^[Vv]r(o*)m!$/}{say$s'

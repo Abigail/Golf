@@ -1,0 +1,25 @@
+How fast am I vrooooming?
+=========================
+
+Introduction
+------------
+
+My car speedometer was hacked! Instead of showing me how fast i'm
+driving, it just shows: "Vroooom!" Please help me know how fast i'm
+going.
+
+Challenge
+---------
+
+Take a string as input, and check if it matches the regex `/^[Vv]ro*m!$/m`.
+In English that means any line of the string must start with a
+capital or lowercase v, then a lowercase r, then any amount (including
+zero) of the lowercase letter o, then the exact string m!. There
+may be other lines, but the Vroom string must be on it's own line.
+
+If you find a match, then you must count the amount of o's in the
+Vroom string and output it. If you don't find a match however, you
+should output any default value that can't be outputted otherwise
+(like -1 or an empty string)
+
+https://codegolf.stackexchange.com/questions/175120/how-fast-am-i-vrooooming/175233#175233
