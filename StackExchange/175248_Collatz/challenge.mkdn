@@ -1,0 +1,41 @@
+The inverse Collatz Conjecture
+==============================
+
+I think the Collatz Conjecture is already well-known. But what if
+we invert the rules?
+
+Start with an integer n &#x2265; 1.
+
+Repeat the following steps:
+
+* If n is even, multiply it by 3 and add 1.
+* If n is odd, subtract 1 and divide it by 2.
+* Stop when it reaches 0
+* Print the iterated numbers.
+
+Test cases
+----------
+
+ 1  =>  1, 0
+ 2  =>  2, 7, 3, 1, 0
+ 3  =>  3, 1, 0
+10  =>  10, 31, 15, 7, 3...
+14  =>  14, 43, 21, 10, ...
+
+
+Rules
+-----
+
+* This sequence does not work for a lot of numbers because it enters
+  in an infinite loop. You do not need to handle those cases. Only
+  printing the test cases above is enough.
+* I suggested to subtract 1 and divide by two to give a valid integer
+  to continue, but it is not required to be computed that way. You
+  may divide by 2 and cast to integer or whatever other methods that
+  gives the expected output.
+* You need to print the initial input as well.
+* The output does not need to be formatted as the test cases. It
+  was just a suggestion. However, the iterated order must be respected.
+
+
+https://codegolf.stackexchange.com/questions/175248/the-inverse-collatz-conjecture/175255#175255

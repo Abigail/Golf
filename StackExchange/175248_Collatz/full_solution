@@ -1,0 +1,21 @@
+#!/opt/perl/bin/perl
+
+use 5.028;
+
+use strict;
+use warnings;
+no  warnings 'syntax';
+
+use experimental 'signatures';
+use integer;
+
+my $n = shift;
+
+{
+    say $n;
+    $n = $n % 2 ? $n / 2 : 3 * $n + 1 and redo;
+}
+
+say 0;
+
+__END__
