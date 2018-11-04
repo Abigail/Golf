@@ -8,9 +8,9 @@ S. Ryley proved following theorem in 1825:
 Challenge
 ---------
 
-Given some rational number r &#x2208; &#x2118;
-find three rational numbers a,b,c &#x2208; &#x2118; such that
-r = a&#x0B; + b&#x0B; + c&#x0B;.
+Given some rational number r &#x2208; &#x211A;
+find three rational numbers a,b,c &#x2208; &#x211A; such that
+r = a&#xB3; + b&#xB3; + c&#xB3;.
 
 Details
 -------
