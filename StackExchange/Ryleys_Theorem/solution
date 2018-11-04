@@ -1,0 +1,41 @@
+perl -Mbigrat -E '$_=eval;($a,$b)=($_*9,$_**2*27);$c=$b*$_;say for map$_/($b-$a+3),$c+1,-$c+$a-1,-$b+$a'
+
+__END__
+
+This reads rationals (in the form "NUMBER/NUMBER", or "NUMBER") from
+STDIN, and write three rationals to STDOUT (each on their own line).
+
+Non-golfed solution:
+
+#!/opt/perl/bin/perl
+
+use 5.028;
+
+use strict;
+use warnings;
+no  warnings 'syntax';
+
+use experimental 'signatures';
+
+use bigrat;
+
+$_ = eval shift;
+
+my $a = $_ * 9;
+my $b = $_ ** 2 * 27;
+my $c = $_ ** 3 * 27;
+my $d = ($b - $a + 3);
+
+my $x = ($c + 1)/ $d;
+my $y = (-$c + $a - 1) / $d;
+my $z = (-$b + $a) / $d;
+
+say for $x, $y, $z;
+
+#
+# For pasting into bc -l
+#
+# say "(" . $x . ")^3 + (" . $y . ")^3 + (" . $z . ")^3";
+
+
+__END__

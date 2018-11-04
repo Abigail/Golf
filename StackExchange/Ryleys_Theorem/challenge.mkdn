@@ -1,0 +1,23 @@
+Ryley's Theorem
+===============
+
+S. Ryley proved following theorem in 1825:
+
+>   Every rational number can be expressed as a sum of three rational cubes.
+
+Challenge
+---------
+
+Given some rational number r &#x2208; &#x2118;
+find three rational numbers a,b,c &#x2208; &#x2118; such that
+r = a&#x0B; + b&#x0B; + c&#x0B;.
+
+Details
+-------
+
+Your submission should be able to compute a solution for every input
+given enough time and memory, that means having for instance two
+32-bit int representing a fraction is not sufficient.
+
+
+https://codegolf.stackexchange.com/questions/175201/ryleys-theorem
