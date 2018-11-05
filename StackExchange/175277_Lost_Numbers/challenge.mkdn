@@ -21,7 +21,7 @@ Scoring
   reduce your score by 30%. This does allow you to enter the digits
   separately. E.g:
 
-    abcde1fg5h
+      abcde1fg5h
 
   is a valid candidate because the number 15
   is not contained, only its digits. However, any 4 or 8
