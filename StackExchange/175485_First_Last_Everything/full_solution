@@ -1,0 +1,34 @@
+#!/opt/perl/bin/perl
+
+use 5.028;
+
+use strict;
+use warnings;
+no  warnings 'syntax';
+
+use experimental 'signatures';
+use Test::More;
+
+sub main ($x, $y) {
+    @_= ($x .. $y, reverse $y .. $x);
+    [$_ [0], $_ [-1], @_ [1 .. $#_ - 1]];
+}
+
+my @tests = (
+    [ 0,  5  =>   [0, 5, 1, 2, 3, 4]],
+    [-3,  8  =>   [-3, 8, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7]],
+    [ 4,  4  =>   [4, 4]],
+    [ 4,  5  =>   [4, 5]],
+    [ 8,  2  =>   [8, 2, 7, 6, 5, 4, 3]],
+    [-2, -7  =>   [-2, -7, -3, -4, -5, -6]],
+);
+
+foreach my $test (@tests) {
+    my ($x, $y, $exp) = @$test;
+    my $got = main $x, $y;
+    is_deeply $got, $exp, "Test case ($x, $y)";
+}
+
+done_testing;
+
+__END__
