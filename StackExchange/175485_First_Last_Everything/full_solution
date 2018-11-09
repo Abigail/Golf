@@ -11,7 +11,7 @@ use Test::More;
 
 sub main ($x, $y) {
     @_= ($x .. $y, reverse $y .. $x);
-    [$_ [0], $_ [-1], @_ [1 .. $#_ - 1]];
+    [$x, $y, @_ [1 .. $#_ - 1]];
 }
 
 my @tests = (
