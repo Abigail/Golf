@@ -1,0 +1,1 @@
+perl -E'print"f($_)=$ARGV[$_-1],"for 1..$#ARGV;say"f(i)=$ARGV[-1]"' $@

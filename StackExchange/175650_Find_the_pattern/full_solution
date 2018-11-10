@@ -1,0 +1,16 @@
+#!/opt/perl/bin/perl
+
+use 5.028;
+
+use strict;
+use warnings;
+no  warnings 'syntax';
+
+use experimental 'signatures';
+
+@ARGV = (1, 2, 3, 4);
+
+print "f($_)=$ARGV[$_-1], " for 1 .. $#ARGV;
+say "f(i)=$ARGV[-1]";
+
+__END__
