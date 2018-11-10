@@ -19,8 +19,8 @@ i'th term be f(i) (i > k,i &#x2208; &#x2115;)
 
 * A non-negative integer x adds 1 to the score
 * The current index i adds 1 to the score
-* +, -, *, / (round down or towards zero, as you decide) and mod
-  (a mod b always equal to a-b*(a/b)) each add 1 to the score
+* `+`, `-`, `*`, `/` (round down or towards zero, as you decide) and `mod`
+  (`a mod b` always equal to `a - b * (a / b`)) each add 1 to the score
 * For each initial term x , add 1 to the score
 * f(i - 1) (with n &#x2264; k) adds 1 to the score. E.g. Using the latest
   value f(i - 1) add 1 to the score, and there must be at least 1 initial term.
