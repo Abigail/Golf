@@ -1,0 +1,1 @@
+perl -lnE'my%h;@h{/./g}=();say if keys%h<8' < ~/Words/enable.lst

@@ -1,0 +1,18 @@
+Spelling Bee Acceptable
+=======================
+
+This is similar to this question. However, I have a different goal
+in mind: Reduce the wordlist to words that could appear. The easy
+part is to delete hyphens and similar.
+
+The hard part, however: Remove words containing more than seven
+letters.
+
+So, the problem: Given a set of words containing only lowercase (or
+uppercase) ASCII letters, remove the words containing eight or more
+different letters.
+
+Any input and output format is acceptable.
+
+
+https://codegolf.stackexchange.com/questions/175559/spelling-bee-acceptable
