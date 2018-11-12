@@ -1,0 +1,36 @@
+Couch 2048: How much more till 2048?
+====================================
+
+
+I have just tried a game called Couch 2048.  Since it wasn't very
+exciting for me, I've been asking myself 'How much more till 2048!?'
+That inspired me to post a challenge, because calculating this in
+not as easy as I thought.
+
+Your goal
+---------
+
+Given a list of balls on the sofa, you have to output how many balls
+with a value of 2 have to fall from the sky so that one can win the
+game (by reaching the 2048 ball).
+
+- Assume the input is valid.
+- Assume the player won't drop any balls.
+- Assume the balls which fall from the sky always have a value of 2,
+  as I've said.  Valid output examples: 3, "4", [5], ["6"]
+- You have to print the smallest amount of 2s needed.
+
+
+Test cases
+----------
+    [2048]                            ->   0   You've already won
+    [1024,1024]                       ->   0   You don't need any more
+                                               balls to win
+    [1024,512,256,128,64,32,16,8,4,2] ->   1   One ball required to 'activate
+                                               the chain'
+    [512]                             -> 768
+    [512,2]                           -> 767
+    [4,16,64]                         -> 982 
+
+
+https://codegolf.stackexchange.com/questions/175765/couch-2048-how-much-more-till-2048/

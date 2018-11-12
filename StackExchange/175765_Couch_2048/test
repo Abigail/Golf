@@ -1,0 +1,33 @@
+#!/opt/perl/bin/perl
+
+use 5.028;
+
+use strict;
+use warnings;
+no  warnings 'syntax';
+
+use Test::More;
+
+use experimental 'signatures';
+
+my $program = '$"=$:;say eval"(2048-@F)/2"';
+
+my @tests = (
+    [[2048]                                     =>   0],
+    [[1024, 1024]                               =>   0],
+    [[1024, 512, 256, 128, 64, 32, 16, 8, 4, 2] =>   1],
+    [[512]                                      => 768],
+    [[512, 2]                                   => 767],
+    [[4, 16, 64]                                => 982],
+);
+
+foreach my $test (@tests) {
+    my ($input, $exp) = @$test;
+    my $got = `echo "@$input" | perl -aE'$program'`;
+    chomp $got;
+    is $got, $exp, "[@$input] => $exp";
+}
+
+done_testing;
+
+__END__

@@ -1,0 +1,11 @@
+This reads a line with numbers (whitespace separated) from `STDIN`,
+and writes the answer to `STDOUT`.
+
+What it does is subtract all the numbers from the input from 2048,
+and it divides the remainder by 2. The `-a` switch puts the in the
+array `@F` (one number per element). If we interpolate an array
+into a string (which is what we are doing here), perl puts the value
+of `$"` between the elements. The little used variable `$:` is be
+default ` \n-`; and since white space between tokens is ignored,
+the result is subtracting all the numbers from 2048. The `eval`
+does the calculation.
