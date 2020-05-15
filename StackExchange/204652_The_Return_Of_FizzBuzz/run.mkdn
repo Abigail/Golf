@@ -1,0 +1,5 @@
+# Notes
+
+* The Perl programs should be run with `perl -M5.010`
+
+* The C program should be compiled with `gcc -w`

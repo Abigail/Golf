@@ -1,0 +1,54 @@
+# Intro
+
+Beauty lies in the eye of the beholder. Output lies in the choice
+of the compiler. There are some codes that give different outputs
+based on what language they are executed in. Take for instance, the
+code given below:
+
+    # include <stdio.h>
+    # define print(a) int main(){printf("C is better"); return 0;}
+    print("Python is better")
+
+When executed in C, it prints "C is better". When using a python
+interpreter, it prints "Python is better".
+
+## Challenge
+
+The challenge is a modification of the FizzBuzz challenge. Write a
+code that gives different outputs based on language it is executed
+in. When executed with the first language, it prints all numbers
+from 1 to 1000 (both inclusive) which are not divisible by 2. If a
+number is divisible by 2, it outputs "FizzBuzz". When executed with
+the second language, if a number is not divisible by 3, it is
+printed. Else, the string "FizzBuzz" is printed.
+
+### Example
+
+Output when executed in language 1 would be
+
+    1 FizzBuzz 3 FizzBuzz 5 FizzBuzz 7 FizzBuzz 9 FizzBuzz ... (upto FizzBuzz 999 FizzBuzz)
+
+Output when executed in language 2 would be
+
+    1 2 FizzBuzz 4 5 FizzBuzz 7 8 FizzBuzz 10 11 FizzBuzz 13 14 FizzBuzz ... (upto 998 FizzBuzz 1000)
+
+## Optional Challenge
+
+You can optionally allow the program to execute in more than 2
+languages. For the ith language, every multiple of (i+1) is substituted
+with FizzBuzz. It isn't necessary, but at least 2 languages are
+compulsory.  Constraints
+
+Need to write a fully functioning code. For instance, a
+method/function/procedure alone (which could not independently
+execute) would not be acceptable
+
+* Can use only 1 file
+
+* All outputs to be printed to standard output (not to standard error)
+
+* All other standard rules of code-golf apply
+
+* Can use non-empty separators
+
+
