@@ -1,0 +1,25 @@
+## Input
+
+A string (or the closest thing to that in your language)
+
+## Output
+
+The same string but converted to sentence case
+
+## Rules
+
+For this challenge, sentence case can be considered "The first
+letter of each sentence is capitalized. The rest are lowercase."
+(i.e. proper nouns do not have to be capitalized)
+
+If the input does not include a period, it is treated as one sentence.
+
+All other punctuation marks are considered periods (?!, etc.)
+
+### Sample test cases
+
+    "hello world." // "Hello world."
+    "CODEGOLF IS FUN." // "Codegolf is fun."
+    "no period" // "No period"
+    "the ball was red. so was the balloon." // "The ball was red. So was the balloon." 
+
