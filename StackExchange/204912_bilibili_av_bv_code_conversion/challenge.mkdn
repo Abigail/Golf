@@ -1,0 +1,87 @@
+# Background
+
+Bilibili is a China-based video sharing platform, similar to Nico
+Nico Douga in Japan, and Youtube around the world.
+
+Since the establishment, Bilibili had been using the AV code to
+reference a video. An AV code is a string of 3 or more characters,
+starting with av and followed by a natural number, like av82054919.
+
+However, since 23 March 2020, Bilibili introduced a new referencing
+system called the BV code. This time, the code is a string of exactly
+12 characters, starting with BV and followed by 10 alphanumerical
+characters, like BV1XJ41157tQ. Still, users can use both codes to
+reference a video, and there is a conversion algorithm between the
+two.
+
+(For your information, the two examples reference the same video)
+
+## The algorithm
+
+To convert from AV code to BV code:
+
+    * Remove the av part of the AV code.
+    * Do a bitwise XOR between the result in step 1 (as a number)
+      and `177451812`.
+    * Add `8728348608` to the result in step 2.
+    * Convert the result in step 3 to a 6-digit base-58 number with digits
+      `fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF` in place
+      of 0, 1, ..., 57 respectively. Here, `0`, `I`, `O`, `l` are omitted to
+      eliminate ambiguity. Assume the result is `abcdef`.
+    * The BV code is then `BV1db4a1c7ef`.
+
+To convert from BV code to AV code:
+
+    * Remove the 1st to 3rd, the 6th, the 8th and the 10th characters.
+      Assume the result is abcdef.
+    * Rearrange the result in step 1 to cbdaef.
+    * Treat the result in step 2 as a base-58 number with digits
+      'fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF' in place
+      of 0, 1, ..., 57 respectively. Convert this base-58 number into decimal.
+    * Subtract `8728348608` from the result in step 3.
+    * Do a bitwise XOR between the result in step 4 and `177451812`.
+    * The AV code is then av followed by the result in step 5.
+
+## Example
+
+To convert av82054919 to BV code:
+
+    * Removing av from the code results in `82054919`.
+    * `82054919 XOR 177451812 = 242727971`
+    * `242727971 + 8728348608 = 8971076579`
+    * `8971076579<sub>10</sub> = (13,38,43,6,30,7)<sub>58</sub>` -> `1J5XtQ`
+    * Substituting: `BV1[X][J]4[1]1[5]7[t][Q]` -> `BV1XJ41157tQ`
+
+To convert BV1XJ41157tQ back to AV code:
+
+    * Remove the bracketed numbers: `[BV1]XJ[4]1[1]5[7]tQ` -> `XJ15tQ`
+    * Rearranging the characters results in `1J5XtQ`.
+    * `1J5XtQ` -> `(13,38,43,6,30,7)<sub>58</sub> = 8971076579<sub>10</sub>`.
+    * `8971076579 - 8728348608 = 242727971`
+    * `242727971 XOR 177451812 = 82054919`
+    * Prepending av to the result, we have `av82054919`.
+
+## Challenge
+
+Write two independent programs or functions, one receiving the AV
+code as input and outputting the corresponding BV code, and one
+receiving the BV code as input and outputting the corresponding AV
+code. Both the prefixes av and BV are case insensitive, you may
+choose either upper or lower case to accept or output. Each code
+should work even without the code from the other.
+
+You may assume that the input for both programs must have a valid
+format, and the number in its corresponding AV code is between 1
+and 2147483647 inclusive.
+
+### Test cases
+
+    AV code      <-> BV code
+    av82054919   <-> BV1XJ41157tQ
+    av123456789  <-> BV1yn411L7tG
+    av1          <-> BV1xx411c7mQ
+    av2147483647 <-> BV1Fr4k1q7G1
+
+You may check your results through this tool (not developed by me).
+Click the first button after entering the AV/BV code into the input,
+then the textbox will show the result.
