@@ -1,0 +1,5 @@
+print ( "Hello, World!" )
+eval("eval('eval(`1`)')")
+_  =  '_  =  %  r  ;  print _  %%  _'  ;  print _  %  _
+[ 1for _ in range(10, 6 , -1)     ]
+print 16
