@@ -1,0 +1,57 @@
+A great Python golfing tip is to omit needless spaces. But if you
+are like me, you don't always have the time to search for which
+spaces to remove. If only there was a way to speed up the process...
+
+## Task
+
+Given a single line of Python, as input, return/output a new line
+which omits all needless spaces. The table below shows which spaces
+are needless, and must be removed for maximum golfage.
+
+
+       | L D S
+    ---+-------
+     L | s s n
+     D | n - n
+     S | n n n
+
+First token is row, second token is column
+* L: Letter
+* D: Digit
+* S: Symbol
+
+* s: space
+* n: no space
+* -: never happens (except multidigit numbers)
+
+## Clarifications
+
+*   What is considered a letter, digit, and symbol?
+    *   Letter: _ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+    *   Digit: 0123456789
+    *   Symbol: !"\#$%&'()*+,-./:;<=>?@[]^`{|}~
+*   You can assume that all characters in the input are either a Letter,
+    Digit, or Symbol.
+*   You can assume that there will be no such test case where two digits
+    are separated by one or more spaces.
+*   You can assume that all test cases contain valid Python syntax.
+*   Follow the above rules for omitting spaces, regardless of whether
+    omitting them will produce incorrect or different code.
+
+## Test Cases
+
+### Input
+
+    print ( "Hello, World!" )
+    eval("eval('eval(`1`)')")
+    _  =  '_  =  %  r  ;  print _  %%  _'  ;  print _  %  _
+    [ 1for _ in range(10, 6 , -1)     ]
+    print 16
+
+### Output
+
+    print("Hello,World!")
+    eval("eval('eval(`1`)')")
+    _='_=%r;print _%%_';print _%_
+    [1for _ in range(10,6,-1)]
+    print 16
