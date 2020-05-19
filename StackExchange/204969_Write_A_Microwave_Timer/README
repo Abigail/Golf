@@ -1,0 +1,3 @@
+Run as:
+
+    perl -MList::Util=min -plF: -E solution.pl < input
