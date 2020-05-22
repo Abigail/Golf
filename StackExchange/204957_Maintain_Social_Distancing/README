@@ -1,0 +1,6 @@
+Call Perl solution as
+
+    perl -M5.010 solution.pl < input
+
+where input is one of the true-* or false-* files. Outputs 1 if
+false, a false value if true.
