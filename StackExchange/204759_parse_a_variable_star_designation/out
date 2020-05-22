@@ -1,0 +1,30 @@
+#!/opt/perl/bin/perl
+
+use 5.028;
+
+use strict;
+use warnings;
+no  warnings 'syntax';
+
+use experimental 'signatures';
+use experimental 'lexical_subs';
+
+my @list = 'R' .. 'Z';
+foreach my $c1 ('R' .. 'Z') {
+    foreach my $c2 ($c1 .. 'Z') {
+        push @list => "$c1$c2";
+    }
+}
+foreach my $c1 ('A' .. 'Q') {
+    next if $c1 eq 'J';
+    foreach my $c2 ($c1 .. 'Z') {
+        next if $c2 eq 'J';
+        push @list => "$c1$c2";
+    }
+}
+
+foreach my $i (keys @list) {
+    printf "%3d: %s\n" => $i + 1, $list [$i] if $list [$i] =~ /(.)\1/;
+}
+
+__END__
