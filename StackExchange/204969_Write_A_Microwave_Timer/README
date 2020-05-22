@@ -1,3 +1,16 @@
+## Perl notes
+
 Run as:
 
     perl -MList::Util=min -plF: -E solution.pl < input
+
+
+## Befunge-93 notes
+
+Reads a number, read a character (`:`) and discard it, multiply the
+read number with 60 (ASCII character 60 equals `"<"`), read the second
+number, and add it to the product (this gives the number of seconds).
+Dub the number of seconds; push 6000 (`6000 = 60 * 100 = "<" * "d"`)
+on the stack and compare. If 6000 is less than the number of seconds,
+push another 6000 on the stack and print it. Else, print the number
+of seconds (which is now the top of the stack).
