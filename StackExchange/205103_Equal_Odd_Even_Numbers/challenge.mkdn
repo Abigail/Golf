@@ -1,0 +1,19 @@
+# [Equal Odd and Even Numbers][Challenge]
+
+Inspired by this code review question, I am curious to see what
+happens if we turn that into a code golf challenge!
+
+Description is easy, input is an array or any similar data structure
+with only unsigned integers, output is a boolean if the number of
+odd are equal to the number of even numbers inside (true or false
+doesn't matter, as long as the opposite is used in case the number
+doesn't match)
+
+Here are some examples with true as output for matching (thanks to
+the original OP)
+
+    [5, 1, 0, 2]      ->  true 
+    [5, 1, 0, 2, 11]  ->  false
+    []                ->  true 
+
+[Challenge]: https://codegolf.stackexchange.com/questions/205103/check-if-an-array-or-equivalent-has-the-same-number-of-odd-and-even-numbers/
