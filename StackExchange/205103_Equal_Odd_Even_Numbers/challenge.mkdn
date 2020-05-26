@@ -16,4 +16,10 @@ the original OP)
     [5, 1, 0, 2, 11]  ->  false
     []                ->  true 
 
+[Try it online (Perl)][Perl]
+
+[Try it online (Befunge-93)][Befunge-93]
+
 [Challenge]: https://codegolf.stackexchange.com/questions/205103/check-if-an-array-or-equivalent-has-the-same-number-of-odd-and-even-numbers/
+[Perl]: https://tio.run/##K0gtyjH9/18l3tbBTddIK70otUAlXtVIx8Ht/39TBUMFAwUjLiitYGjIxWWoAIJGIIjMVjD6l19QkpmfV/xfNzGnAAA
+[Befunge-93]: https://tio.run/##S0pNK81LT/3/36BMQUHBQU/FhkvbTs3KUFtROS7eSNVIy1D3/39TBSMFAwVjAA
