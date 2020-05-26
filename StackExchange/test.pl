@@ -22,7 +22,7 @@ foreach my $solution (@solutions) {
 
     foreach (@prog) {
         next unless /#%\s*/p;
-        if (${^POSTMATCH} =~ /(?:Opts|O):\s*/p) {
+        if (${^POSTMATCH} =~ /(?:Opt|O):\s*/p) {
             push @options => ${^POSTMATCH};
         }
     }
@@ -31,7 +31,18 @@ foreach my $solution (@solutions) {
         my ($ext) = $input =~ /^input(.*)/;
         my  $exp_output = "output$ext.exp";
         my  $exp = `cat $exp_output`;
-        my  $got = `perl @options ./$solution $input`;
+
+        my  $pid = open my $child, "-|";
+        die "Failed to fork: $!" unless defined $pid;
+        if (!$pid) {
+            exec "perl", @options, "./$solution", $input;
+            die "Failed to exec: $!";
+        }
+        #
+        # Parent
+        #
+        local $/;
+        my $got = <$child>;
 
         is  $got, $exp, "Test: $input";
     }
