@@ -1,0 +1,27 @@
+#!/opt/perl/bin/perl
+
+use 5.026;
+
+use strict;
+use warnings;
+no  warnings 'syntax';
+
+use experimental 'signatures';
+
+my $input  = "input_by_line";
+my $output = "output_by_line.exp";
+
+my @input  = `cat $input`;
+my @output = `cat $output`;
+
+foreach my $index (keys @input) {
+    open my $i_fh, ">", "input$index"      or die "open: $!";
+    open my $o_fh, ">", "output$index.exp" or die "open: $!";
+    print $i_fh $input  [$index];
+    print $o_fh $output [$index];
+    close $i_fh or die "close: $!";
+    close $o_fh or die "close: $!";
+}
+
+
+__END__

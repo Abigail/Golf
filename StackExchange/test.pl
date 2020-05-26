@@ -29,6 +29,7 @@ foreach my $solution (@solutions) {
 
     foreach my $input (<input*>) {
         my ($ext) = $input =~ /^input(.*)/;
+        next if $ext eq "_by_line";
         my  $exp_output = "output$ext.exp";
         my  $exp = `cat $exp_output`;
 
