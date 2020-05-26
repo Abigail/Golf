@@ -1,0 +1,25 @@
+# Remove loops from a walk
+
+I've been playing around with a robot on the coordinate plane. This
+robot is able to tell me if it goes left, right, up, or down by
+reporting back a string consisting of the letters L, R, U, and D,
+such as DLURRDLURDLLLRRLRLDURRU. Each character represents a movement
+of one unit. However, it seems that the robot is going in loops on
+the plane, returning to coordinates that it has already visited. I
+don't want the robot to do that. I'd like the robot to tell me about
+the path it takes without any loops included - these loops should
+be removed from left to right in the string. Every step in the
+string it reports should represent movement to a cell that it has
+not yet visited before. If the robot ends where it starts, then it
+should report back an empty string.
+
+## Test cases
+
+    ULRURU -> UURU
+    URDLDRU -> DRU
+    LLLLRRRL -> LL
+    LLLULRRRL -> LLLUR
+    UURDDRULDL -> {empty string}
+    DLURRDLURDLLLRRLRLDURRU -> R
+    URULLLDLUULDDLDRDDLLLLLDLLUUULLURU -> URULLLDLUULDDLDRDDLLLLLDLLUUULLURU
+
