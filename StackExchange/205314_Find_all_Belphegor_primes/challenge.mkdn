@@ -1,0 +1,29 @@
+# Find all Belphegor primes
+
+A Belphegor number is a number of the form (10<sup>n+3</sup> + 666)
+* 10<sup>n+1</sup> + 1 (1{n zeroes}666{n zeroes}1) where n is an
+non-negative integer. A Belphegor prime is a Belphegor number that
+is also prime.
+
+The n values of the first few Belphegor primes are 0, 13, 42, 506 (A232448)
+
+## Task
+
+Write a program that either:
+
+    * takes no input and outputs all Belphegor primes.
+    * takes a input k and outputs the first k Belphegor primes.
+
+A reference python implementation can be found here.
+
+## Rules
+
+    * You may output the n value for the Belphegor prime instead of the
+      prime itself
+    * You may use probabilistic primality tests as long as there is no
+      known counter case.
+
+
+[Try it Online][TIO-kaqpupen]
+
+[TIO-kaqpupen]: https://tio.run/##FcrdCsIgGIDhW@ngSyaj1GKeiN1B1yCOPoYwf1AHxbZbz9rRCw9vwjwPrZVlPKUOvL7TFfxDg9m2DswZPCGH9zdKdzBaSCmFWhMhxX5UYbJnHAhnKuMr7q19Y6ouhtIuz@HKBf8X3wmz8xiqnXVxU7B1yXgco5tcqD8 "Perl 5 – Try It Online"
