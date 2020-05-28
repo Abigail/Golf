@@ -1,0 +1,27 @@
+# Pairs with sum divisible by 5.
+
+You will be given two integers `M` and `N` Find the number of pairs `(x, y)`
+such that `1 <= x <= M`, `1 <= y <= N`, and `(x + y) mod 5 = 0`.
+
+For example, if `M = 6`, and `N = 12`, pairs which satisfies such
+conditions are, `(1,4), (4,1), (1,9), (2,3), (2,8), (3,2), (3,7),
+(3,12), (4,6), (6,4), (4,11), (5,5), (5,10), (6,9)`.
+
+Total 14
+
+## Sample
+
+    Input : 6 12
+    Output: 14
+
+    Input : 11 14
+    Output: 31
+
+    Input : 553 29
+    Output: 3208
+
+    Input : 2 2
+    Output: 0
+
+    Input : 752486 871672
+    Output: 131184195318 
