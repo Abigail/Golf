@@ -1,0 +1,70 @@
+# Pass the ball around the circle
+
+The ball game is a game in which a number of players sit together
+in a circle. Each player is first assigned a number `n` either 1,
+2, or 3. The game begins with any starting player, and proceeds
+clockwise around the circle. The current player with the ball throws
+it to the next player. Who the next player is solely depends on the
+number `n` the current player was assigned.
+
+    * If `n`, the next player will be the one sat directly adjacent
+      (one space away), traveling in the current direction.
+
+    * If `n`, the next player will be the one sat two spaces away,
+      traveling in the current direction.
+
+    * If `n`, the direction of play is first switched (clockwise to
+      counter-clockwise, and vice-versa). The next player will then be
+      the one sat directly adjacent, traveling in the new direction.
+
+## Task
+
+You are given a list of numbers `l` all in the range `[1-3]`,
+denoting the numbers each player was assigned. The elements in `l`
+are given in clockwise order, and such that the last element of `l`
+is adjacent to the first element. Your task is to determine the
+number of players who have touched the ball, before the it reaches
+a player who previously already touched the ball.
+
+## Example
+
+The starting player is at the first index. X represents a visited
+index, O represents an index visited twice.
+
+    [1, 2, 1, 1, 2, 2, 3] ->
+    [X, 2, 1, 1, 2, 2, 3] ->
+    [X, X, 1, 1, 2, 2, 3] ->
+    [X, X, 1, X, 2, 2, 3] ->
+    [X, X, 1, X, X, 2, 3] ->
+    [X, X, 1, X, X, 2, X] ->
+    [X, X, 1, X, X, X, X] ->
+    [X, X, 1, O, X, X, X]
+    The answer is 6.
+
+## Clarifications
+
+    * `l` can be inputted in any reasonable format, but the numbers
+       1, 2, and 3 must not change
+    * The starting player does not have to be at the first index,
+      but please specify where it would start
+    * This is code-golf, so the shortest code in bytes wins!
+
+## Test Cases
+
+    Input (start is index 0) -> Output
+    [1] -> 1
+    [2] -> 1
+    [3] -> 1
+    [3, 2] -> 2
+    [2, 1] -> 1
+    [2, 2, 3] -> 3
+    [1, 1, 1, 1, 1] -> 5
+    [2, 2, 2, 2, 2] -> 5
+    [3, 3, 3, 3, 3] -> 2
+    [1, 3, 2, 1, 2, 3] -> 2
+    [1, 2, 1, 1, 2, 2, 3] -> 6
+
+
+[Perl solution][TIO-kar02q4a]
+
+[TIO-kar02q4a]: https://tio.run/##LYvNCoMwEITveYogW9AmKfnBS5bQnrz1CUoPghYEaUR7KeKrN12iDOwyM99M/TzWCYoAMmhM4IPBtQQM0DxAPqtrF1cKFXhJoeHDi15wCIUQuDO0o3EJUgCewVenW4Nz38XNL@0Xii0lwyxzzHHLLDecjuWOGX4o@yxCDlFLOLU7aTOZd784fYb4XpK61xdtdFLtHw "Perl 5 – Try It Online"
