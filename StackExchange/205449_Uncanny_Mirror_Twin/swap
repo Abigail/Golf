@@ -1,0 +1,34 @@
+#!/opt/perl/bin/perl
+
+use 5.028;
+
+use strict;
+use warnings;
+no  warnings 'syntax';
+
+use experimental 'signatures';
+use experimental 'lexical_subs';
+
+open my $fh_in,  "<", "solution1.pl" or die $!;
+open my $fh_out, ">", "solution2.pl" or die $!;
+
+my @in = <$fh_in>;
+chomp @in;
+
+my @chars_in = map {[split // => $_]} @in;
+
+my @chars_out;
+foreach my $i (keys @chars_in) {
+    foreach my $j (keys @{$chars_in [$i]}) {
+        $chars_out [$j] [$i] = $chars_in [$i] [$j];
+    }
+}
+
+foreach my $line (@chars_out) {
+    say $fh_out map {$_ // " "} @$line;
+}
+
+close $fh_out or close $!;
+
+
+__END__
