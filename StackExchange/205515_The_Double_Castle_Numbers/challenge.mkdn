@@ -1,0 +1,42 @@
+# The Double-Castle Numbers
+
+## Introduction
+
+A double-castle number is a positive integer number that has a pattern of
+
+    a...aba...aba...aa...aba...aba...a
+    m as  m as  m as n as  n as  n as
+
+Where `m > 0`, `n > 0`, and `a - b = 1` are all non-negative integers,
+when represented in an integer base `B` where `B >= 2`. It is so
+named because a bar chart representing the digits of such a number
+resembles two castles of the same height placed side by side.
+
+For example, 7029* is a castle number because when represented in
+base 2 it becomes `1101101110101<sub>2</sub>`, which can be split into
+`11011011` and `10101`.
+
+This is the case when `m = 2, n = 1, a = 1, b = 0 and B = 2`.
+
+`305421994212` is also a castle number because when represented in base 8
+it becomes `4343444344344<sub>8</sub>`, which can be split into
+`43434` and `44344344`.
+
+This is the case when `m = 1, n = 2, a = 4, b = 3 and B = 8`.
+
+## Challenge
+
+Write a program or function that, given integers `m > 0, n > 0, 1
+<= a < B` and `B >= 2`, calculate the corresponding double-castle
+number and output it in base-10.
+
+## Test Cases
+
+    m, n, a, B  => Output
+    1, 1, 1, 2  => 693
+    2, 1, 1, 2  => 7029
+    1, 2, 3, 4  => 62651375
+    1, 2, 4, 8  => 305421994212
+    1, 4, 7, 10 => 7676777776777767777
+    2, 4, 8, 16 => 164983095594247313234036872
+
