@@ -1,0 +1,15 @@
+[DON'T… do NOT lowercase UPPERCASE this][codegolf]
+
+Write a program that outputs its input unchanged. However:
+
+    * If all uppercase characters are removed from the program,
+      it lowercases all uppercase letters.
+    * If all lowercase characters are removed from the program,
+      it uppercases all lowercase letters.
+
+Transforming characters beyond the basic Latin [A-Za-z] range is
+optional, but any character with both uppercase and lowercase
+counterparts within Unicode qualifies for "removal" from your program.
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/205638/dont-do-not-lowercase-uppercase-this/

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+tr -d 'a-z' < solution-normal.pl > solution-uppercase.pl
+tr -d 'A-Z' < solution-normal.pl > solution-lowercase.pl

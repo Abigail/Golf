@@ -1,0 +1,31 @@
+#!/opt/perl/bin/perl
+
+use 5.028;
+
+use strict;
+use warnings;
+no  warnings 'syntax';
+
+use experimental 'signatures';
+use experimental 'lexical_subs';
+
+use Test::More;
+
+while (<DATA>) {
+    chomp;
+    chomp (my $get_nm = `echo "$_" | perl -p solution-normal.pl`);
+    chomp (my $get_uc = `echo "$_" | perl -p solution-uppercase.pl`);
+    chomp (my $get_lc = `echo "$_" | perl -p solution-lowercase.pl`);
+
+    subtest $_, sub {
+        is $get_nm,     $_,  "Normal";
+        is $get_uc, uc ($_), "Uppercase";
+        is $get_lc, lc ($_), "Lowercase";
+    }
+}
+
+done_testing;
+
+__DATA__
+Hello, world
+foo BAR BaZ
