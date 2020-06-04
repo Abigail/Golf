@@ -1,0 +1,77 @@
+# Shift the letters, soldier?
+
+## Context
+
+We're at war! You need to transfer an important message to your
+general to inform him from an imminent assault. The thing is, your
+enemy knows a lot about cryptography : you will need to be more
+creative in order to encode your message...
+
+## Task
+
+Create a program that accepts an ASCII message as input, and outputs
+the encoded message. The message should be encoded this way : each
+character should get its ASCII value shifted by its position in the
+message.
+
+For example, let's encode the message "Hello, world!"
+
+    H   e   l   l   o   ,       w   o   r   l   d   !     Original message
+
+    72  101 108 108 111 44  32  119 111 114 108 100 33    ASCII value
+
+    0   1   2   3   4   5   6   7   8   9   10  11  12    Place in the message
+
+    72  102 110 111 115 49  38  126 119 123 118 111 45    Encoded ASCII (line 1 + line 2)
+
+    H   f   n   o   s   1   &   ~   w   {   v   o   -     Encoded message
+
+The message `Hello, world!` should be encoded as `Hfnos1&~w{vo-`.
+
+Sometimes the encoded ASCII can go beyond printable character. In
+that case, the value loop back to 32 (read the rules for additionnal
+informations)
+
+    T   h   e       r   a   n   d   o   m       g   u   y      Original message
+
+    84  104 101 32  114 97  110 100 111 109 32  103 117 121    ASCII value
+
+    0   1   2   3   4   5   6   7   8   9   10  11  12  13     Place in the message
+
+    84  105 103 35  118 102 116 107 119 118 42  114 129 134    Encoded ASCII (line 1 + line 2)
+
+    84  105 103 35  118 102 116 107 119 118 42  114 34  39    Corrected encoded ASCII (looped back to 32)
+
+    T   i   g   #   v   f   t   k   w   v   *   r   "   '
+
+`The random guy` is then converted into `Tig#vftkwv*r"'`
+
+Using the same strat, `zzzzzzzzz` will be converted into `z{|}~
+!"#` (ASCII values converted into 122 - 123 - 124 - 125 - 126 - 32
+- 33 - 34 - 35)
+
+## Rules
+
+    * The input message will be composed of printable ASCII
+      characters (between 32 and 126)
+
+    * The message should be encoded as described before.
+
+    * The ASCII values of the encoded message should be set between 32 and 126.
+
+    * If the new ASCII value goes beyond the limit, it should loop back to 32.
+
+    * Every character should be encoded. This includes punctuation, spaces etc.
+
+
+
+# Solution
+
+## Befunge-93
+
+Keeps the character count on the bottom of the stack. Then in a
+loop, reads a character at the time, subtracts 32 to the character,
+adds the character count, mods it with 95, adds 32 again, then
+prints the character. Finally, it adds 1 to the character count.
+
+[Try it online](https://tio.run/##S0pNK81LT/3/36rOylBbUdkhXklBSVdbKV5JFcjQ1jHU/v@/CgYA)

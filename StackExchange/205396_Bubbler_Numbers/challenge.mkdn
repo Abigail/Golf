@@ -1,0 +1,37 @@
+# [Bubbler numbers][codegolf]
+
+## Background
+
+My user ID is `78410`, or `10011001001001010<sub>2</sub>`. One
+interesting property of this number is that, in binary,
+
+    * it doesn't have three consecutive identical digits, and yet
+    * it has a substring `100100100` which is three copies of 100.
+
+So, I define a Bubbler number as a positive integer whose binary
+representation satisfies the following:
+
+    * it doesn't have three consecutive identical digits (so it is a
+      member of [A063037][A063037]), and
+    * it contains a substring which is three consecutive copies of
+      some nonempty string (so it is NOT a member of [A286262][A286262]).
+
+## Task
+
+Given a positive integer as input, determine if it is a Bubbler number.
+
+You can use truthy/falsy values in your language or two distinct
+values to indicate true/false respectively.
+
+There are 55 Bubbler numbers under 1000:
+
+     42  84  85 106 149 169 170 171 212 213 292 298 299 338 339 340 341
+    342 362 365 405 425 426 427 438 585 596 597 598 618 658 661 676 677
+    678 681 682 683 684 685 724 725 730 731 804 810 811 850 851 852 853
+    854 874 876 877
+
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/205396/bubbler-numbers/205410#205410
+[A063037]: http://oeis.org/A063037
+[A286262]: http://oeis.org/A063037
