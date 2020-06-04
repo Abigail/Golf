@@ -1,0 +1,88 @@
+# [Extract words with clue numbers in a Crossword puzzle][codegolf]
+
+## Task
+
+Given a completed Crossword puzzle, extract the words in it with
+their respective clue numbers, with "across" (horizontal) and "down"
+(vertical) words grouped and ordered like a real crossword puzzle.
+
+The words are numbered in the row-major order of their first letters.
+If an "across" word and a "down" word share the first letter, the
+two words share one number. (As in regular Crossword, single-letter
+words don't count; they should not be numbered or included in the
+output.)
+
+The input is given as a character matrix (or equivalent), with
+letters being uppercase (or lowercase if you want) and non-letter
+cells being blank. You can assume that single-letter islands won't
+appear in the input. If you want, you can assume the grid is
+rectangular (shorter rows are padded with spaces).
+
+The output must be clearly grouped into "across" and "down" (you
+don't need to return or print these strings though), and the words
+must be ordered in the increasing order of the clue number (see
+test cases).
+
+## Test cases
+
+### Input
+
+    MESS 
+    YAWN 
+     SAID
+     TYPO
+
+### Output
+    Across: 1. MESS 5. YAWN 6. SAID 8. TYPO
+    Down: 1. MY 2. EAST 3. SWAY 4. SNIP 7. DO
+
+### Input
+
+       RECURS
+      PARAPET
+     TRIANGLE
+    COOLS RAW
+    HUTS MATE
+    ORE CODED
+    INCLUDES
+    RETIRES
+    SYSTEM
+
+### Output
+
+    Across: 1. RECURS 7. PARAPET 8. TRIANGLE 9. COOLS 10. RAW 11. HUTS
+            12. MATE 13. ORE 14. CODED 15. INCLUDES 17. RETIRES 18. SYSTEM
+    Down: 1. RAILS 2. ERAS 3. CAN 4. UPGRADES 5. RELATES 6. STEWED
+          7. PROTECTS 8. TOURNEY 9. CHOIRS 12. MODEM 14. CURE 16. LIT
+
+### Input
+
+    MICROWAVE
+    U       S
+    M OCEAN C
+    M  OWL  A
+    I SWELL P
+    E       E
+    SCHEDULES
+
+### Output
+
+    Across: 1. MICROWAVE 3. OCEAN 7. OWL 8. SWELL 9. SCHEDULES
+    Down: 1. MUMMIES 2. ESCAPES 4. COW 5. EWE 6. ALL
+
+### Input
+
+    TAB
+    A U
+    BUBBLE
+      B O
+      LOVED
+      E E
+
+### Output
+
+    Across: 1. TAB 3. BUBBLE 5. LOVED
+    Down: 1. TAB 2. BUBBLE 4. LOVE
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/205614/extract-words-with-clue-numbers-in-a-crossword-puzzle/
