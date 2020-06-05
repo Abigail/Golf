@@ -20,15 +20,21 @@ foreach my $solution (@solutions) {
 
     my @options;
     my $is_bool;
+    my %post_process;
 
     foreach (@prog) {
         next unless /#%\s*/p;
         my $info = ${^POSTMATCH};
-        if ($info =~ /(?:Opt|O):\s*/p) {
-            push @options => ${^POSTMATCH};
+        my ($key, $args) = $info =~ /^([^:]+):\s*(.*)/;
+        $args =~ s/\s+$//;
+        if ($key =~ /^O(?:pt)?$/) {
+            push @options => $args;
         }
-        elsif ($info =~ /(?:Boolean|Bool|B):\s*/p) {
+        elsif ($key =~ /^B(?:ool(?:ean)?)?$/) {
             $is_bool = 1;
+        }
+        elsif ($key =~ /^P(?:ost)?$/) {
+            $post_process {lc $args} = 1;
         }
     }
 
@@ -50,8 +56,22 @@ foreach my $solution (@solutions) {
         local $/;
         my $got = <$child>;
 
-        chomp (my @exp = split /\n/ => $exp, -1);
-        chomp (my @got = split /\n/ => $got, -1);
+        my (@exp, @got);
+
+        if ($post_process {space}) {
+            #
+            # Compare as if everything is space separated
+            #
+            @exp = join " ", split /\s+/ => $exp, -1;
+            @got = join " ", split /\s+/ => $got, -1;
+        }
+        else {
+            #
+            # Line by line
+            #
+            chomp (@exp = split /\n/ => $exp, -1);
+            chomp (@got = split /\n/ => $got, -1);
+        }
 
         if ($is_bool) {
             @exp = map {$_ ? 1 : 0} @exp;
