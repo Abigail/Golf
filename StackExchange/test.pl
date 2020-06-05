@@ -45,7 +45,15 @@ foreach my $solution (@solutions) {
         local $/;
         my $got = <$child>;
 
-        is  $got, $exp, "Test: $input";
+        chomp (my @exp = split /\n/ => $exp, -1);
+        chomp (my @got = split /\n/ => $got, -1);
+
+        subtest "Test: $input", sub {
+            foreach my $i (keys @exp) {
+                is $got [$i], $exp [$i], "Line: " . $i;
+            }
+            is scalar @got, scalar @exp, "Expected number of outputs"
+        }
     }
 }
 
