@@ -19,11 +19,16 @@ foreach my $solution (@solutions) {
     chomp @prog;
 
     my @options;
+    my $is_bool;
 
     foreach (@prog) {
         next unless /#%\s*/p;
-        if (${^POSTMATCH} =~ /(?:Opt|O):\s*/p) {
+        my $info = ${^POSTMATCH};
+        if ($info =~ /(?:Opt|O):\s*/p) {
             push @options => ${^POSTMATCH};
+        }
+        elsif ($info =~ /(?:Boolean|Bool|B):\s*/p) {
+            $is_bool = 1;
         }
     }
 
@@ -47,6 +52,11 @@ foreach my $solution (@solutions) {
 
         chomp (my @exp = split /\n/ => $exp, -1);
         chomp (my @got = split /\n/ => $got, -1);
+
+        if ($is_bool) {
+            @exp = map {$_ ? 1 : 0} @exp;
+            @got = map {$_ ? 1 : 0} @got;
+        }
 
         subtest "Test: $input", sub {
             foreach my $i (keys @exp) {
