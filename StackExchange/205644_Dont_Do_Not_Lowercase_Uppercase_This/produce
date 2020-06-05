@@ -1,4 +1,6 @@
 #!/bin/sh
 
-tr -d 'a-z' < solution-normal.pl > solution-uppercase.pl
-tr -d 'A-Z' < solution-normal.pl > solution-lowercase.pl
+for file in solution*-normal.pl;
+do tr -d 'a-z' < $file > ${file/normal/uppercase}
+   tr -d 'A-Z' < $file > ${file/normal/lowercase}
+done
