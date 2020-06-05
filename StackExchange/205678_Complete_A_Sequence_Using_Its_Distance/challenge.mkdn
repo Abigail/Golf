@@ -1,0 +1,60 @@
+# [Complete a sequence using its distances][codegolf]
+
+
+Given `A = (a`<sub>`i`</sub>`, ..., a`<sub>`k`</sub>`), k >= 2`
+a sequence of positive integers, in which all elements are different.
+
+Starting from `i = 2`, while `a`<sub>i</sub> &#x2208; `A:`<sub>
+(until the last element)</sub>
+
+* If `d = |a`<sub>`i`</sub>` - a`<sub>`i - 1`</sub>`|` is not already in `A`, append `d` to `A`.
+* Increase `i`.
+
+Output the completed sequence.
+
+## Example
+
+    In:  16 21 11 2
+
+         16 21 11 2 5
+          --^
+         16 21 11 2 5 10
+             --^
+         16 21 11 2 5 10 9
+                --^
+         16 21 11 2 5 10 9 3
+                  --^
+         16 21 11 2 5 10 9 3
+                    --^
+         16 21 11 2 5 10 9 3 1
+                       --^
+         16 21 11 2 5 10 9 3 1 6
+                         --^
+         16 21 11 2 5 10 9 3 1 6
+                           --^
+         16 21 11 2 5 10 9 3 1 6
+                             --^
+    Out: 16 21 11 2 5 10 9 3 1 6
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/205678/complete-a-sequence-using-its-distances
+
+## Solution
+
+    @F{@F}=@F;{$d=abs($F[0]-$F[1]);$F{$d}++or$F[@F]=$d;say shift@F;@F>1&&redo}say@F
+
+Reads in a line of input, with the integers space separated. Outputs
+the sequence with each number on a different line.
+
+How does it work? It gets the input in the array `@F` (due to the
+`-a` command line argument). In the hash `%F` it stores the numbers
+already in `@F` (here we use the given that all numbers in sequence
+are positive integers<sup>†</sup>). Then, in a loop, we find the
+distance between the first two elements of `@F`; if not seen before,
+we add it to `@F` (and `%F`). We then remove the first element of
+`@F` and print it. We exit the loop if only one element is left,
+which is printed just before exiting the program.
+
+<sup>†</sup>The sequence can never contain a zero, as that requires
+two subsequent elements to be the same, but that is not allowed.
+
