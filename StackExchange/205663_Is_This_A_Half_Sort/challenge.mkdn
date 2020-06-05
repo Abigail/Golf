@@ -1,0 +1,59 @@
+# [Is this a half-sort?][codegolf]
+
+The problem over here introduces an new type of strings: if you
+split the string into equal halfs and swap the pairs, it produces
+the same output as sorting the string. We call that a half-sort.
+
+Given a purely ASCII string, check if the string is in a half-sort.
+An example of a half-sort string
+
+The string node is a half-sort string, because if you sort by
+codepoints (note that the codepoints are in decimal, not binary):
+
+    n 110
+    o 111
+    d 100
+    e 101
+
+That gets turned into:
+
+    d 100
+    e 101
+    n 110
+    o 111
+
+You'll see that the node to deno conversion is exactly moving the
+right half to the left position.
+
+## Specification
+
+    * For odd-length strings, splitting should make the first half longer.
+    * Sorting a string means sorting the string based on the codepoints
+      of the characters.
+
+## Reference program & test cases
+
+Here is the reference program I made for checking my test cases.
+
+    node -> True
+    rum  -> True
+
+    deno -> False
+    rim  -> False
+    ```
+
+[codegolf]: https://codegolf.stackexchange.com/questions/205663/is-this-a-half-sort/
+
+
+# [Solution][tio]
+
+    push@F,splice@F,0,(@F+1)/2;$_="@F"eq"@{[sort@F]}"
+
+Splits a line of input into characters, which are placed in `@F`.
+We remove the first half and tag it to the end. We then check whether
+the array is the same if we sort it -- if the result is the same,
+the string was a half sort, if not, it wasn't.
+
+Outputs 1 for a half sort, the empty string when not.
+
+[tio]: https://tio.run/##K0gtyjH9/7@gtDjDwU2nuCAnMzkVyDDQ0XBw0zbU1DeyVom3VXJwU0otVHKoji7OLypxcIutVfr/Py8/JZWrqDSXKyU1L5@rKDP3X35BSWZ@XvF/3ZwCN319AA
