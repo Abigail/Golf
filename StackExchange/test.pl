@@ -62,6 +62,8 @@ foreach my $solution (@solutions) {
             #
             # Compare as if everything is space separated
             #
+            $exp =~ s/\s+$//;
+            $got =~ s/\s+$//;
             @exp = join " ", split /\s+/ => $exp, -1;
             @got = join " ", split /\s+/ => $got, -1;
         }
