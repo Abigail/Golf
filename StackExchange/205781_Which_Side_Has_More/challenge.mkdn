@@ -1,0 +1,36 @@
+# [Which side has more?][codegolf]
+
+The challenge is to golf a program when given a string composed of
+any number of asterisks, then a comma, than any number of asterisks,
+say which side has more.
+
+The asterisk-strings can be empty.
+
+## Output
+
+* 0 for ties.
+* 1 for the left.
+* 2 for the right.
+
+## Examples
+
+* Input: `***,****` Output: `2`
+* Input: `***,` Output: `1`
+* Input: `***,***` Output: `0`
+* Input: `,` Output: `0`
+
+
+
+# [Befunge Solution][tio]
+
+Adds one for each character it encounters, until it sees a `,`; in
+that case, the program self modifies to start subtracting one for
+each character it encounters. After seeing the end of the string,
+it checks whether the tally is 0, less than 0, or something else,
+and prints 0, 2 or 1 accordingly.
+
+
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/205739/which-side-has-more/
+[tio]: https://tio.run/##S0pNK81LT/3/367OylBbUbksXklHSRdEG2pzxSkUKBgoaKsoW1oqKOkq2XBpGybEWyko2@g56P3/r6Wlo6UFAA
