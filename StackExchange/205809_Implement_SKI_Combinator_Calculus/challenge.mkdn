@@ -1,0 +1,33 @@
+# [Implement SKI combinator calculus][codegolf]
+
+This challenge is to golf an implementation of SKI formal combinator
+calculus.
+
+## Definition
+
+### Terms
+
+`S`, `K`, and `I` are terms.
+
+If `x` and `y` are terms then `(xy)` is a term.
+
+### Evaluation
+
+The following three steps will be repeated until none of them apply.
+In these, `x`, `y`, and `z` must be terms.
+
+* `(Ix)` will be replaced by `x`
+* `((Kx)y)` will be replaced by `x`
+* `(((Sx)y)z)` will be replaced by `((xz)(yz))`
+
+## Input
+
+A string or array, you do not have to parse the strings in the program.
+
+If the simplification does not terminate, the program should not
+terminate.
+
+## Examples
+
+`(((SI)I)K)` should evaluate to `(KK)`
+(`(((SI)I)K) > ((IK)(IK)) > (K(IK)) > (KK)`)
