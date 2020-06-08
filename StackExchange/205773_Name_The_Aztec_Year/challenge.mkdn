@@ -1,0 +1,56 @@
+# [Name the Aztec year][codegolf]
+
+
+It's time for another Mesoamerican calendar! The Xiuhnelpilli was
+used by the Aztecs (more properly, the Mexica) to name their years.
+Each year has a number and a sign. Here's part of the cycle:
+
+    Input; Output
+    1089; 13 Calli
+    1090; 1 Tochtli 
+    1091; 2 Acatl 
+    1092; 3 Tecpatl 
+    1093; 4 Calli 
+    1094; 5 Tochtli 
+    1095; 6 Acatl 
+    1096; 7 Tecpatl 
+    1097; 8 Calli 
+    1098; 9 Tochtli 
+    1099; 10 Acatl 
+    1100; 11 Tecpatl 
+    1101; 12 Calli 
+    1102; 13 Tochtli 
+    1103; 1 Acatl 
+    1104; 2 Tecpatl 
+
+The pattern should be clear enough: the number is counting up to
+13, and the sign goes Tochtli, Acatl, Tecpatl, Calli. After 52 years
+the pattern repeats itself.
+
+The program will take as input an integer between 1064 (the year
+the Mexica left their mythological homeland of Aztlan) and 1521
+(fall of Tenochtitlan to the Spaniards), inclusive, and output the
+corresponding year name. It can be a single string (in which case
+there needs to be a space between number and sign), or a tuple (e.g.
+`["2", "Calli"]`) of your preferred format. The sign name is always
+capitalised.
+
+Handling years outside the specified range is not necessary. It's
+code-golf, so the shortest code wins!
+
+## Test cases
+
+The entire example list above, plus:
+
+    Input; Output
+    1064; 1 Tecpatl
+    1521; 3 Calli
+
+## [Befunge solution][tio-befunge]
+
+Reads the year from input, and duplicates it. Adds 2, mods it with
+13, adds 1 to the result and prints it. Then mods the year with 4,
+and using a series if if statements, selects the right name to print
+
+[codegolf]: https://codegolf.stackexchange.com/questions/205773/name-the-aztec-year/
+[tio-befunge]: https://tio.run/##S0pNK81LT/3/X83KSNvMXFvVUFvPRNVKuSxeKacksSA5NURJR6eMy0bJOTEnJ1MpvkxZUdfQysZBBwQUbBSAwIZLAQbsjBIUoVqTHZXiuOIUFHR0lELykzNKgJpt/v83NLA0AgA
