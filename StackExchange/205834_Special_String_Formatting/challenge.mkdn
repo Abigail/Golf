@@ -1,0 +1,49 @@
+# [Special String reformatting][codegolf]
+
+This challenge is to take an alphabetical string as input and to
+apply the following conversion:
+
+The first of each type of character of the string must stay, and
+must be immediately followed by an integer representing how many
+of these characters were in the original string. Any repeating
+characters must be omitted.
+
+All inputs will be entirely lower-case letters (no spaces). Outputs
+must be ordered in the same way as the inputs (input hi must give
+output of h1i1, not i1h1)
+
+## Examples
+
+* Input: `potato` Output: `p1o2t2a1`
+* Input: `pqwertyuiop` Output: `p2q1w1e1r1t1y1u1i1o1`
+* Input: `thisisanexample` Output: `t1h1i2s2a2n1e2x1m1p1l1`
+* Input: `oreganoesque` Output: `o2r1e3g1a1n1s1q1u1`
+* Input: `aaaaaaabaaaaaa` Output: `a13b1`
+
+[codegolf]: https://codegolf.stackexchange.com/questions/205834/special-string-reformatting
+
+## Solutions
+
+### solution1.pl
+
+Reads a line from `STDIN`, assuming it's **not** newline terminated.
+
+Splits the input into characters, available (in order), in `@F`
+(due to the `-F//`). Counts the occurrence of each character in the
+hash `%F`. Then loops over `@F`: if present in `%F` with a true
+value, print the character and its count, then set the corresponding
+entry in `%F` to 0. This ensures each character is only outputted
+once.
+
+The TIO code has some header and footer code so we can handle
+multiple test inputs. They're not needed if we just have one line
+of input.
+
+### solution2.pl
+
+Starts off by adding 1 to each character. Then, as often as possible,
+find a letter followed by a number, with the same letter elsewhere
+in the string followed by a digit (which has to be 1). Increment
+the count, and remove the same letters followed by its 1.
+
+Reads from `STDIN`, writes to `STDOUT`.
