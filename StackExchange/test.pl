@@ -21,8 +21,10 @@ foreach my $solution (@solutions) {
     my @options;
     my $is_bool;
     my %post_process;
+    my $size = 0;
 
     foreach (@prog) {
+        $size += length unless /#(?:%|\s*Header|\s*Footer)/;
         next unless /#%\s*/p;
         my $info = ${^POSTMATCH};
         my ($key, $args) = $info =~ /^([^:]+):\s*(.*)/;
@@ -87,6 +89,8 @@ foreach my $solution (@solutions) {
             is scalar @got, scalar @exp, "Expected number of outputs"
         }
     }
+
+    diag "Size = $size";
 }
 
 done_testing;
