@@ -1,0 +1,27 @@
+[Generate self-avoiding loops of a specific length][codegolf]
+
+This question is a sequel to [this one][other], working in the
+opposite direction.
+
+For a reminder of terminology, the letters L, R, U, and D represent
+one-unit movement of a robot on the coordinate plane in the directions
+left, right, up, and down respectively. Given a positive even integer
+n, generate and print all sequences of L, R, U, and D of length n
+that result in a closed loop that does not intersect itself. In
+other words, when the robot follows the instructions in the sequence
+of letters, it must visit a new cell with every movement until it
+completes the loop and returns to the original cell.
+
+Any of the generally accepted output formats for arrays and strings
+are allowed. The elements printed must be in alphabetical order.
+It can be assumed that the input is always a positive even integer.
+
+Test cases
+
+    2 -> {"DU", "LR", "RL", "UD"}
+    4 -> {"DLUR", "DRUL", "LDRU", "LURD", "RDLU", "RULD", "ULDR", "URDL"}
+    6 -> {"DDLUUR", "DDRUUL", "DLLURR", "DLUURD", "DRRULL", "DRUULD", "LDDRUU", "LDRRUL", "LLDRRU", "LLURRD", "LURRDL", "LUURDD", "RDDLUU", "RDLLUR", "RRDLLU", "RRULLD", "RULLDR", "RUULDD", "ULDDRU", "ULLDRR", "URDDLU", "URRDLL", "UULDDR", "UURDDL"}
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/205932/generate-self-avoiding-loops-of-a-specific-length
+[other]: https://codegolf.stackexchange.com/questions/205214/remove-loops-from-a-walk
