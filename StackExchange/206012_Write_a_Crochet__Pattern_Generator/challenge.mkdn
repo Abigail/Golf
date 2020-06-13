@@ -1,0 +1,116 @@
+# [Write a crochet pattern generator][codegolf]
+
+## Introduction
+
+I crochet a lot, and lately I've started writing crochet patterns.
+However, while I work very well from notes such as *rnds 2-6 (round
+number = x, original number of stitches = y): \*dc x-2 stitches, 2
+dc in next stitch\* around (xy stitches)*, most published patterns
+spell out each row in more detail. I don't like writing out each
+individual row/round myself though, so I want to have a program do
+it for me.
+
+## Challenge
+
+The challenge is to write a program or function that takes three
+mandatory inputs (r, s, and y) and returns a string of the pattern.
+
+## Inputs
+
+The inputs can go in any appropriate order or format, just please
+point that out so others can run your code.
+
+R is an integer corresponding to the number of rounds/rows (use
+whichever designation you want) to generate. S is a string corresponding
+to the type of stitch. This can be guaranteed to be one of the
+following strings: "tc", "dc", "hdc", "sc", or "ch". Y is the number
+of stitches in row/round 1, and the number of increases in each
+following row (for instance, if y=6, row 1 has 6 stitches, row 2
+has 12 stitches, row 3 has 18 stitches, etc). In the general case:
+row x has xy stitches.
+
+## Outputs
+
+The output is a list of strings with length r, in the following pattern.
+
+`O N: \*s in next N-2 stitches, 2 s in next stitch\* y times (NY stitches).`
+
+To clarify: it should return r strings, in order from least row/rnd
+number to greatest row/rnd number. The first row/rnd should be row
+1, and the last row should be row r. In the template, replace s and
+y with the matching inputs, and N is the row number of the current
+row (N isn't an input, just an integer that represents the current
+row). O is used to denote one of the following strings, your choice:
+"Row", "Round" or "Rnd".
+
+Each line of output should be separated by a newline. The period
+is necessary and should follow the parentheses.
+
+## Edge Cases
+
+You can assume s is one of the listed strings. R will always be a
+positive integer, as will y.
+
+You don't have to do anything fancy for row 1, it can be
+`Row 1: \*s in next -1 stitches, 2 s in next stitch\* y times (y stitches).`
+Row 2 can also be outputted in the default format, as
+`Row 2: \*s in next 0 stitches, 2 s in next stitch\* y times (2y stitches).`
+Thusly, it can be outputted with a for loop. But, if you output rows 1 and 2 as 
+`Row 1: s in next y stitches (y stitches).\nRow 2: 2 s in next y stitches
+(2y stitches).`, you can have -10% or -10 bytes, whichever is smaller,
+removed from your score.
+
+## Scoring
+
+This is code golf, so fewest bytes wins. If you output rows 1 and
+2 as shown in the Output section above, your score is lowered by
+-10% or -10 bytes, whichever is smaller.
+
+## Example Input and Output
+
+Input [the format doesn't matter so much as the answer, so it could
+be any format the language supports]: (r,s,y)
+
+        (5, "dc", 6)
+        (3, "sc", 1)
+        (6, "hdc", 100)
+        (0, "ch", 1)
+        (5, "tc", 0)
+
+Output [this format must be fairly exact, hyphens are used to show
+negative numbers]:
+
+1. `Row 1: \*dc in next -1 stitches, 2 dc in next stitch\* 6 times
+    (6 stitches).\nRow 2: \*dc in next 0 stitches, 2 dc in next stitch\*
+    6 times (12 stitches).\nRow 3: \*dc in next 1 stitches, 2 dc in
+    next stitch\* 6 times (18 stitches).\nRow 4: \*dc in next 2 stitches,
+    2 dc in next stitch\* 6 times (24 stitches).\nRow 5: \*dc in next
+    3 stitches, 2 dc in next stitch\* 6 times (30 stitches).`
+
+2. `Rnd 1: \*sc in next -1 stitches, 2 sc in next stitch\* 1 times (1
+    stitches).\nRnd 2: \*sc in next 0 stitches, 2 sc in next stitch\*
+    1 times (2 stitches).\nRnd 3: \*sc in next 1 stitches, 2 sc in next
+    stitch\* 1 times (3 stitches).\n`
+
+3. `Rnd 1: \*hdc in next -1 stitches, 2 hdc in next stitch\* 100 times
+    (100 stitches).\nRnd 2: \*hdc in next 0 stitches, 2 hdc in next
+    stitch\* 100 times (200 stitches).\nRnd 3: \*hdc in next 1 stitches,
+    2 hdc in next stitch\* 100 times (300 stitches).\nRnd 4: \*hdc in
+    next 2 stitches, 2 hdc in next stitch\* 100 times (400 stitches).\nRnd
+    5: \*hdc in next 3 stitches, 2 hdc in next stitch\* 100 times (500
+    stitches).\nRnd 6: \*hdc in next 4 stitches, 2 hdc in next stitch\*
+    100 times (600 stitches).\n`
+
+4.  This can error, or not produce any output, or anything. R
+    will always be positive and nonzero.
+    
+5.  This can either error
+    OR produce `Rnd 1: \*tc in next -1 stitches, 2 tc in next stitch\*
+    0 times (0 stitches).\nRnd 2: \*tc in next 0 stitches, 2 tc in next
+    stitch\* 0 times (0 stitches).\nRnd 3: \*tc in next 1 stitches, 2
+    tc in next stitch\* 0 times (0 stitches).\nRnd 4: \*tc in next 2
+    stitches, 2 tc in next stitch\* 0 times (0 stitches).\nRnd 5: \*tc
+    in next 3 stitches, 2 tc in next stitch\* 0 times (0 stitches).`
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/206012/write-a-crochet-pattern-generator
