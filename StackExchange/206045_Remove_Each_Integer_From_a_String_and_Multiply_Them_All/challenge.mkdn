@@ -1,0 +1,48 @@
+# [Remove each integer from a string and multiply them all!][codegolf]
+
+## Goal
+
+* Get every integer from the string (not a number, but integer)
+* Multiply them
+* Output the result
+
+## Input
+
+    5 kilograms of food eaten, 10 liters of water drank, 20 plates
+    dirty, 40 mugs dirty, and only 3 people acted!
+
+
+## Output
+
+    120000
+
+
+## How
+
+Result was 5 * 10 * 20 * 40 * 3
+
+
+## What do we count as an integer
+
+### General
+
+* If integer has a symbol BEFORE of AFTER the int, only take the
+  number without symbols. `-335` or `335+` are `335` anyways.
+
+* If integer has a symbol like this: `35:3`, don't take it. `35 : 3`
+  is available though, and considered as 2 integers.
+
+### Detailed
+
+* `35/3` aren't two integers, skip this
+* `35.3` is not an integer, skip this
+* `35:3`, `35*3`, `3e3`, etc. aren't ints, skip them as well
+* `353` is an integer
+* `35 3` are two integers
+* `353.` is an integer
+* `353?`, `353!`, etc. are integers
+* `-353` is an integer, but you only claim `353` and skip "-".
+* `+353` is the same case as upper
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/206045/remove-each-integer-from-a-string-and-multiply-them-all
