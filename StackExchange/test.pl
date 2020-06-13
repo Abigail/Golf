@@ -69,6 +69,10 @@ foreach my $solution (@solutions) {
             @exp = join " ", split /\s+/ => $exp, -1;
             @got = join " ", split /\s+/ => $got, -1;
         }
+        elsif ($post_process {none}) {
+            @exp = $exp;
+            @got = $got;
+        }
         else {
             #
             # Line by line
