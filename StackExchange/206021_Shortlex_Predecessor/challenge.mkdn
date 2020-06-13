@@ -1,0 +1,85 @@
+# [Shortlex predecessor][codegolf]
+
+Given a non-empty string made of `a-z`, output the string immediately
+before it in the shortlex order.
+
+## Shortlex order
+
+We enumerate strings in shortlex order by first listing the strings
+of length 0, then those of length 1, then length 2, and so on,
+putting them in alphabetical order for each length. This gives an
+infinite list of all strings. Said a bit differently, this sorts
+strings by length, tiebroken alphabetically.
+
+For strings `a-z` as used in the challenge, this list goes (abridged):
+
+    (empty string)
+    a
+    b
+    c
+    ...
+    z
+    aa
+    ab
+    ...
+    az
+    ba
+    bb
+    ...
+    zy
+    zz
+    aaa
+    aab
+    ...
+
+## Scoring
+
+Answers will be compared in shortlex order, with earlier being better.
+
+Like in code golf, fewest bytes wins, but there's a tiebreak for
+same-length answers in favor of coming first alphabetically. This
+means that you'll want to further "golf" your answer to use characters
+with lower code points where this doesn't hurt its length. Characters
+nearer to the start are more important.
+
+For non-ASCII languages, answers are treated as a sequence of bytes.
+Use the byte order of the code page to compare characters, not their
+UTF encoding.
+
+For your answer's header, you can just put the code's length and
+say when you've outgolfed a same-length answer in the same language.
+You could also put the code's position in shortlex order if that
+number is not too long.
+
+## Input and output
+
+The input string will be between 1 and 10 characters long, and
+consist only of letters `a-z`. As per site defaults, you may do I/O
+with strings as lists of characters or code points. The letters
+should be lowercase (code points 97-122).
+
+## Test cases
+
+The first output is the empty string.
+
+    a -> 
+    c -> b
+    z -> y
+    aa -> z
+    az -> ay
+    ba -> az
+    aaa -> zz
+    zaa -> yzz
+    golf -> gole 
+    bzaaaaaaaa -> byzzzzzzzz
+    zzzzzzzzzz -> zzzzzzzzzy
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/206021/shortlex-predecessor/
+
+## Solution
+
+Very slow. Starting with a, it iterates over all the strings
+consisting of lower case letters, in shortlex order. If it matches
+the input, it prints the previous string. Some bytes are wasted to
+deal with the input of a, which should return the empty string.
