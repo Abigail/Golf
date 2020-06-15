@@ -1,0 +1,46 @@
+# [Lucky dice rolls][codegolf]
+
+In pen and paper roleplaying games dice are used for various chance
+calculations. The usual way to describe a roll is `NdK` where `N` is
+the number of dice and `Kz is the number of faces on a die. For example
+`3d6` means that you need to roll the classical 6-sided die 3 times
+(or roll 3 dice at the same time). Both `n` and `k` are positive integers.
+
+Usually the values are then summed and they are used for various
+game mechanics like chance to hit something or damage calculations.
+
+A lucky roll will mean that you have Fortuna's favor on your side
+(or against you). Luckiness is an integer number that increases (or
+decreases) the sum in the following way. The roll is modified to
+`(N + |luck|)dK` and the sum will be the `N` best (or worst) values.
+Each die is fair, so they will have the same probability for the
+outcome of the possible values per die.
+
+The *luck* can be a negative number, in this case you need to get
+the `N` worst values for the sum.
+
+## Input
+
+The integer values for `N`, `K`, *luck* in any way.
+
+## Output
+
+The expected value for the sum of the (un)lucky roll. The expected
+value is `sum x_i p_i` where `x_i` is the possible outcome of the
+sum and `p_i` is the probability for `x_i` occuring, and `i` indexes
+all possible outcomes. The output value can be float or rational
+number, at least 3 decimal places of accuracy or a fraction of two
+integer numbers, whichever suits your program better.
+
+## Examples
+
+    n,k,luck    expected value
+    1,6,0       3.5
+    2,6,0       7
+    2,6,-1      5.541666666666667
+    2,6,1       8.458333333333334
+    2,10,-1     8.525
+    2,10,1      13.475
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/206142/lucky-dice-rolls
