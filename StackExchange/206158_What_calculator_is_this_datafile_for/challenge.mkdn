@@ -40,10 +40,26 @@ above.
 [codegolf]: https://codegolf.stackexchange.com/questions/206158/what-calculator-is-this-datafile-for
 
 
-## Solution
+## Solutions
+
+### Perl
 
 Keep the first digit and the next two characters, removes anything
 after that, and inserts a `-` before the first digit. Replaces any `P`
 with a `+`. Removes any `*`.
 
 Reads lines from `STDIN`, writes versions to `STDOUT`.
+
+### [Befunge-93][befunge]
+
+Read two characters (and ignore them). Read a char (`T`) and print
+it. Read another char (`I`) and print it. Print a `-`. Read a char
+(a digit) and print it. Read another char (a digit) and print
+it<sup>&#x2020;</sup>.
+Read a char, end the program if it's not a `P`, else print a `+`
+and end the program.
+
+<sup>&#x2020;</sup>We cannot just read a number and print a number,
+as that will be printed with an additional trailing space.
+
+[befunge]: https://tio.run/##S0pNK81LT/3/v66uTqdOR0lXSQdE11kpBSjpKjvEK2kr6Tj8/6@lFeJpaRrg7g4A
