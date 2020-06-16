@@ -87,8 +87,9 @@ the month will start with a Monday, iff `W' == 0`.
 
     7%              Mod 7.
 
-    #@_1.@          If the result is 0, Monday is the first day of
-                    the month, and we print 1 and exit; else, we just exit.
+    !.@             Negate the result and print it -- if 0 (hence, first
+                    day of the month is a Monday), then 1, else (not a 
+                    Monday) 0.
 
 [formula]: https://cs.uwaterloo.ca/~alopez-o/math-faq/mathtext/node39.html
 [codegolf]: https://codegolf.stackexchange.com/questions/206067/does-this-month-start-on-a-monday/
