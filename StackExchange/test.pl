@@ -10,10 +10,11 @@ use experimental 'signatures';
 
 use Test::More;
 
-my @solutions = <solution*.pl>;
+my @solutions = <solution*.pl solution*.bc>;
 
 foreach my $solution (@solutions) {
     diag ($solution) if @solutions > 1;
+    my $type = $solution =~ s/.*\.//r;
 
     my @prog  = `cat $solution`;
     chomp @prog;
@@ -43,13 +44,22 @@ foreach my $solution (@solutions) {
     foreach my $input (<input*>) {
         my ($ext) = $input =~ /^input(.*)/;
         next if $ext eq "_by_line";
-        my  $exp_output = "output$ext.exp";
+        next if $ext =~ /^-/ && $ext !~ /^-\Q$type/;
+        my ($exp_output) = grep {-f} "output$ext.exp",
+                                     "output" . ($ext =~ s/^-\Q$type//r)
+                                              . ".exp";
+        die "Cannot find an output file for $input" unless $exp_output;
         my  $exp = `cat $exp_output`;
 
         my  $pid = open my $child, "-|";
         die "Failed to fork: $!" unless defined $pid;
         if (!$pid) {
-            exec "perl", @options, "./$solution", $input;
+            if ($type eq 'pl') {
+                exec "perl", @options, "./$solution", $input;
+            }
+            elsif ($type eq 'bc') {
+                exec "bc ./$solution < $input"
+            }
             die "Failed to exec: $!";
         }
         #
