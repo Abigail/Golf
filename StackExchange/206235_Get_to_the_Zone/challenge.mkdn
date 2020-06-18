@@ -1,0 +1,53 @@
+# [Get to the Zone!][codegolf]
+
+You are playing a famous game called *1DArrayBattleGround*. In the game,
+the player can be stationed in any position from 0 to 10<sup>5</sup>.
+
+You are a Paratrooper in the game and have the ability to do two
+types of operation:
+
+* Advance, which would multiply your position by 2
+* Fall-back, which would decrease your current position by 1
+
+Each type of operation requires 1 second.
+
+You are stationed in `N`
+and want to go to `M` in the minimum time possible, (`1 <= N, M <= 10^4`).
+
+Find out the minimum time you need to Get to `M`.
+
+Note: After each operation, you must remain in the zone
+from 0 to 10<sup>5</sup>.
+
+### Sample
+
+    Input : 4 6
+    Output: 2
+
+    Input : 10 1
+    Output: 9
+
+    Input : 1 3
+    Output: 3
+
+    Input : 2 10
+    Output: 5
+
+    Input : 666 6666
+    Output: 255
+
+    Input : 9999 10000
+    Output: 5000
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/206235/get-to-the-zone/
+
+
+## Solution
+
+### bc
+
+Given `n`, and `m`, return `n - m` if `n` is greater than or equal
+to `m`. Else, it returns `1` plus `1` (if `m` is odd), plus the
+result of (`n`, `m / 2`), with the division rounded upwards. The
+latter is done with a recursive call.

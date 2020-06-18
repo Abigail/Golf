@@ -1,0 +1,1 @@
+define f(n,m){if(n>=m)return n-m;return 1+m%2+f(n,(m+m%2)/2)}
