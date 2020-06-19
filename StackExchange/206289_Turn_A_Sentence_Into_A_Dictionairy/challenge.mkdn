@@ -1,0 +1,49 @@
+# [Turn a sentence into a dictionary][codegolf]
+
+For this challenge, you will be given a long string as an input.
+With this string, you must create a dictionary.
+
+## Details
+
+This dictionary will contain all the words from the string - a word
+being any sequence of letters surrounded by non-letter characters
+(ASCII). Letter case of the entries of the dictionary should always
+be consistent (i.e. all lower case or all upper case, or only the
+first letter of each word is capitalised). The dictionary can be a
+list, array, or any other type so long as the words are distinct
+from each other. Finally, as this is a dictionary, the words must
+be in alphabetical order, and there may not be any duplicates.
+
+You can assume no contractions will be used (the input will never
+contain it's, there's, etc.)
+
+## Some examples
+
+    "this is an eXaMpLe of an Input" -> ["an","example","input","is","of","this"]
+    "Here is another example of an input, this time with Punctuation!" -> ["an","another","example","here","input","is","of","punctuation","this","time","with"]
+    "290(&79832aAa(*& *79 --=BBBb)bbBb ( x )*d -cxaAa_" -> ["aaa","bbbb","cxaaa","d","x"]
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/206289/turn-a-sentence-into-a-dictionary
+
+## Solutions
+
+### `perl -Mfeature=say -MList::Util=uniq -n`
+
+Lowercases the input string (read from `STDIN`), extracts sequences
+of letters, removes duplicates, sorts and prints them.
+
+### `gawk -F[^a-zA-Z]+`
+
+Works for GNU AWK, not regular AWK, due to the use of the `asorti` function.
+
+The input is split on anything which isn't a letter, leaving the
+words in `$1`, `$2`, etc. We iterate over the numbered variables,
+and, if they aren't equal to the empty string<sup>&dagger;</sup>, we put
+them, lowercased, into an associative array `a` as an index. Once
+done, we sort the indices of the array `a` and put the result into
+an array `b`. Finally, we print the elements of `b`, in order.
+
+<sup>&dagger;</sup>We need the test for an empty string, because if the
+input string ends with a non-letter, the last numbered variable
+will be an empty string.
