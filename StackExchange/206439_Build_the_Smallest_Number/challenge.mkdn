@@ -1,0 +1,39 @@
+# [Build the smallest number][codegolf]
+
+Given a non-empty list of digits 0 though 9, output the smallest
+number that can be produced by an expression formed by reordering
+these digits and introducing exponentiation signs ^, with adjacent
+digits getting concatenated as multi-digit numbers. Exponentiation
+is evaluated as right-associative.
+
+For example, [4, 2, 3, 3] could become 2^34^3 which evaluates as
+2^(34^3), but simply writing 2334 is smallest here. You can assume
+that any array containing a 0 gives a minimum of zero (a special
+case), or that it's achievable by an expression like 0^rest, or
+like 00 for just zeroes.
+
+The input list can be taken as any ordered sequence, but not as an
+unordered (multi)set.
+
+## Test cases
+
+    [2,3] => 8 (2^3)
+    [3,3] => 27 (3^3)
+    [4,3] => 34 (34)
+    [1,2,3] => 1 (1^2^3)
+    [2,2,2] => 16 (2^2^2)
+    [2,3,2] => 81 (2^3^2) 
+    [3,0] => 0 (Special, or maybe 0^3)
+    [0,1,0] => 0 (Special, or maybe 0^10)
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/204606/build-the-smallest-number/
+
+
+## Solution
+
+Reads a list of white space separated numbers from `STDIN`, writes
+the answer to `STDOUT`. If the input contains a `0`, output `0`,
+else, if the input contains a `1`, output a `1`. Else, if it's one
+of 6 special cases, output the corresponding value. Otherwise,
+output the sorted input.
