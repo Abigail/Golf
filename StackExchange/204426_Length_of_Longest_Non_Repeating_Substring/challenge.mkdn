@@ -1,0 +1,65 @@
+# [Length of Longest Non-Repeating Substring][codegolf]
+
+Your task is to take as input a single string (or list of characters,
+list of code points, etc.) and return the longest substring with
+no character appearing more than once.
+
+**Aside**: This challenge is similar to Longest Non-Repeating Substring,
+but without the source restriction ranking submissions by their own
+longest non-repeating substring.
+
+## Assumptions
+
+* You may assume that the input contains only lowercase letters and is
+  non-empty (ie. the input will match the regex `(a-z)+`).
+* This challenge will use the following definition for substring:
+  "A contiguous sequence of characters contained in the input string"
+* By "non-repeating" I mean that no letter of the substring is repeated more
+  than once.
+
+## Examples
+
+If the input is `abcdefgabc` then the longest substrings with no
+repeating characters are `abcdefg` and `bcdefga` (their positions in
+the string are `[abcdefg]abc` and `a[bcdefga]bc`). The length of these
+substrings is 7, so the output would be 7.
+
+If the input is `abadac` then the longest substrings with no repeating
+characters are `bad` (`a[bad]ac`) and `dac` (`aba[dac]`) so the output is 3.
+
+If the input is `aaaaaa` then the longest substring with no repeating
+characters is `a` so the output is 1.
+
+If the input is `abecdeababcabaa` then the longest substrings with
+no repeating characters are `abecd` (`[abecd]eababcabaa`) and `cdeab`
+(`abe[cdeab]abcabaa`). The output is thus 5.
+
+## Test Cases
+
+    abcdefgabc -> 7
+    aaaaaa -> 1
+    abecdeababcabaa -> 5
+    abadac -> 3
+    abababab -> 2
+    helloworld -> 5
+    longest -> 7
+    nonrepeating -> 7
+    substring -> 8
+    herring -> 4
+    abracadabra -> 4
+    codegolf -> 6
+    abczyoxpicdabcde -> 10
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/204426/length-of-longest-non-repeating-substring
+
+## Solution
+
+Reads lines from `STDIN`, writing results to `STDOUT`.
+
+For each line, it iterates over every sub string (`/.+(?!)/` will
+do that; `/(?!)/` will never match). For each sub string, if it
+doesn't contain a duplicated character (`/(.).*\1/` matches if there
+is a duplicated character), it stores the length of the sub string.
+We'll print the maximum of those values.
+
