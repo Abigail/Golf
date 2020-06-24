@@ -10,7 +10,7 @@ use experimental 'signatures';
 
 use Test::More;
 
-my @solutions = <solution*.pl solution*.bc>;
+my @solutions = <solution*.pl solution*.bc solution*.gawk solution*.awk>;
 
 foreach my $solution (@solutions) {
     diag ($solution) if @solutions > 1;
@@ -59,6 +59,9 @@ foreach my $solution (@solutions) {
             }
             elsif ($type eq 'bc') {
                 exec "bc ./$solution < $input"
+            }
+            elsif ($type eq 'awk' || $type eq 'gawk') {
+                exec $type, @options, "-f", "./$solution", $input;
             }
             die "Failed to exec: $!";
         }
