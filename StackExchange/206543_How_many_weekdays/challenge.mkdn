@@ -1,0 +1,16 @@
+# [How many weekdays?][codegolf]
+
+This a simple question.
+
+The start day is a Saturday and let the input be a non-negative number x.
+
+The output should be the number of weekdays (Mon-Fri) in the next
+x days inclusive.
+
+For example, if x = 3 then the output should be 2. For x from 0
+onwards the output should be:
+
+    0,0,1,2,3,4,5,5,5,6,7,8,9,10,10,10,11,...
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/206543/how-many-weekdays/

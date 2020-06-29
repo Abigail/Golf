@@ -1,0 +1,1 @@
+define f(n){return n*6/7-n/7}
