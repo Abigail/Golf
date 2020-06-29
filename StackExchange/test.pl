@@ -11,6 +11,8 @@ use experimental 'signatures';
 use Test::More;
 
 my @solutions = <solution*.pl solution*.bc solution*.gawk solution*.awk>;
+my @allinputs = grep {/^input[0-9]*(?:-(?:pl|bc|g?awk))?$/}
+                grep {!/_by_line$/} <input*>;
 
 foreach my $solution (@solutions) {
     diag ($solution) if @solutions > 1;
@@ -41,15 +43,32 @@ foreach my $solution (@solutions) {
         }
     }
 
-    foreach my $input (<input*>) {
-        my ($ext) = $input =~ /^input(.*)/;
-        next if $ext eq "_by_line";
-        next if $ext =~ /^-/ && $ext !~ /^-\Q$type/;
-        my ($exp_output) = grep {-f} "output$ext.exp",
-                                     "output" . ($ext =~ s/^-\Q$type//r)
-                                              . ".exp";
-        die "Cannot find an output file for $input" unless $exp_output;
-        my  $exp = `cat $exp_output`;
+    my %seen;
+    my @numbers = sort {$a <=> $b} 
+                  grep {!$seen {$_} ++} map {/input([0-9]+)/} @allinputs;
+    my @inputs;
+    my @outputs;
+    foreach my $number ("", @numbers) {
+        #
+        # Select the right inputs
+        #
+        my $input  = -f "input$number-$type"      ? "input$number-$type"
+                   : -f "input$number"            ? "input$number"
+                   :                                "";
+        my $output = -f "output$number-$type.exp" ? "output$number-$type.exp"
+                   : -f "output$number.exp"       ? "output$number.exp"
+                   :                                "";
+        if (-f $input && -f $output) {
+            push @inputs  => $input;
+            push @outputs => $output;
+        }
+    }
+
+
+    foreach my $i (keys @inputs) {
+        my $input  = $inputs  [$i];
+        my $output = $outputs [$i];
+        my  $exp = `cat $output`;
 
         my  $pid = open my $child, "-|";
         die "Failed to fork: $!" unless defined $pid;
