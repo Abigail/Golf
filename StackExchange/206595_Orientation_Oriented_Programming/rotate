@@ -10,33 +10,40 @@ use experimental 'signatures';
 
 use List::Util qw [max];
 
-open my $fh, "<", "solution.pl" or die "open: $!";
+foreach my $ext (qw [pl]) {
+    my $solution       = "solution.$ext";
+    my $solution_hflip = "solution-hflip.$ext";
+    my $solution_vflip = "solution-vflip.$ext";
+    my $solution_dflip = "solution-dflip.$ext";
 
-my @lines = <$fh>;
-chomp @lines;
+    open my $fh, "<", $solution or die "open: $!";
 
-#
-# Find the longest line, space pad the shorter ones.
-#
-my $max = max map {length} @lines;
-foreach my $line (@lines) {
-    $line .= " " x ($max - length $line);
-}
+    my @lines = <$fh>;
+    chomp @lines;
 
-{
-    open my $fh_hflip, ">", "solution-hflip.pl" or die "open: $!";
-    open my $fh_vflip, ">", "solution-vflip.pl" or die "open: $!";
-    open my $fh_dflip, ">", "solution-dflip.pl" or die "open: $!";
+    #
+    # Find the longest line, space pad the shorter ones.
+    #
+    my $max = max map {length} @lines;
     foreach my $line (@lines) {
-        say $fh_hflip scalar reverse $line;
+        $line .= " " x ($max - length $line);
     }
-    foreach my $line (reverse @lines) {
-        say $fh_vflip $line;
-        say $fh_dflip scalar reverse $line;
+
+    {
+        open my $fh_hflip, ">", $solution_hflip or die "open: $!";
+        open my $fh_vflip, ">", $solution_vflip or die "open: $!";
+        open my $fh_dflip, ">", $solution_dflip or die "open: $!";
+        foreach my $line (@lines) {
+            say $fh_hflip scalar reverse $line;
+        }
+        foreach my $line (reverse @lines) {
+            say $fh_vflip $line;
+            say $fh_dflip scalar reverse $line;
+        }
+        close $fh_hflip;
+        close $fh_vflip;
+        close $fh_dflip;
     }
-    close $fh_hflip;
-    close $fh_vflip;
-    close $fh_dflip;
 }
 
 
