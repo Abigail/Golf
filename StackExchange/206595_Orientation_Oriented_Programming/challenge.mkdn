@@ -1,0 +1,89 @@
+# [Orientation Oriented Programming][codegolf]
+
+Write a program for a specific language that in different orientations
+performs different tasks.
+
+Your code should have at least two non-empty lines and at least two
+non-empty columns and should complete at least one challenge from
+each category of challenges below when oriented in different ways.
+Orientations
+
+Your code can be arranged eight different ways, original and three
+ninety degree rotations and each reversed, eg:
+
+    $_=     $@$      /$     =. 
+    @F.     /F_     .F@     _F/
+    $/       .=     =_$     $@$
+
+    =_$      .=     $/      $@$
+    .F@     /F_     @F.     _F/
+     /$     $@$     $_=     =.
+
+Here's a generator (thanks to @fireflame241!)
+
+## Tasks
+
+### string
+
+* "Hello, World!"
+* Covefify a string
+* No A, just CAPS LOCK
+* Don't google "google"
+* 1, 2, Fizz, 4, Buzz
+
+### number
+
+* Is this number a prime?
+* Fibonacci function or sequence
+* You're on a 8 day streak!
+* Count up forever
+* Am I a Rude Number?
+
+### kolmogorov-complexity
+
+* Sing Happy Birthday to your favourite programming language
+* Print a Tabula Recta!
+* Sing Baby Shark
+* Build me a brick wall!
+* Hare Krishna Hare Krishna Krishna Krishna Hare Hare
+
+### quine
+
+* A program that is a proper quine.
+* Program that creates larger versions of itself (quine-variant)
+* Print your code backwards - reverse quine
+* Print the last, middle and first character of your code
+* Mirror quine (or my head hurts) - This counts as two rotations!
+
+### ascii-art
+
+* Do you want to code a snowman?
+* It's my Birthday :D
+* In Honor of Adam West
+* 5 Favorite Letters
+* It took me a lot of time to make this, pls like. (YouTube Comments #1)
+
+## Scoring
+
+Your score will be the number of different tasks solved by your
+code (higher is better) with code length as a tie-breaker (lower
+is better).
+
+## Rules
+
+* All programs must be in the same language
+* The rules for each task are as specified in the linked questions.
+* Multiple tasks can be completed in the same orientation to help
+  maximise score. For example, if s challenge has no expectation to
+  handle the empty input, you could instead perform another task that
+  takes no input.
+* Your code must perform tasks when oriented in at least three unique rotations.
+
+
+## Solution
+
+* `solution.pl` prints `Hello, World!`.
+* `solution-hflip.pl` reads a number, prints 1 if it's a prime.
+* `solution-vflip.pl` prints numbers starting from 1.
+* `solution-dflip.pl` reads a string. If the string equals `google`, we die.
+   Else, we print the string in reverse.

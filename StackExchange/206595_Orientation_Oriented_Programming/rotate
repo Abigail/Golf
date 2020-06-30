@@ -1,0 +1,43 @@
+#!/opt/perl/bin/perl
+
+use 5.026;
+
+use strict;
+use warnings;
+no  warnings 'syntax';
+
+use experimental 'signatures';
+
+use List::Util qw [max];
+
+open my $fh, "<", "solution.pl" or die "open: $!";
+
+my @lines = <$fh>;
+chomp @lines;
+
+#
+# Find the longest line, space pad the shorter ones.
+#
+my $max = max map {length} @lines;
+foreach my $line (@lines) {
+    $line .= " " x ($max - length $line);
+}
+
+{
+    open my $fh_hflip, ">", "solution-hflip.pl" or die "open: $!";
+    open my $fh_vflip, ">", "solution-vflip.pl" or die "open: $!";
+    open my $fh_dflip, ">", "solution-dflip.pl" or die "open: $!";
+    foreach my $line (@lines) {
+        say $fh_hflip scalar reverse $line;
+    }
+    foreach my $line (reverse @lines) {
+        say $fh_vflip $line;
+        say $fh_dflip scalar reverse $line;
+    }
+    close $fh_hflip;
+    close $fh_vflip;
+    close $fh_dflip;
+}
+
+
+__END__
