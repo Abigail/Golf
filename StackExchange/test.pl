@@ -114,6 +114,12 @@ foreach my $solution (@solutions) {
         }
 
         if ($is_bool) {
+            #
+            # I have absolutely no fucking clue why 'chomp (@got)' nor
+            # 'chomp (@exp)' isn't chopping off the new lines.
+            #
+            s/\n$// for @got;
+            s/\n$// for @exp;
             @exp = map {$_ ? 1 : 0} @exp;
             @got = map {$_ ? 1 : 0} @got;
         }
