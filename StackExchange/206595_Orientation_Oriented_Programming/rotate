@@ -10,7 +10,7 @@ use experimental 'signatures';
 
 use List::Util qw [max];
 
-foreach my $ext (qw [pl]) {
+foreach my $ext (qw [pl bf]) {
     my $solution               =  "solution.$ext";
     my $solution_hflip         =  "solution-hflip.$ext";
     my $solution_vflip         =  "solution-vflip.$ext";
