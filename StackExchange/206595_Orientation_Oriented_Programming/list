@@ -1,26 +1,26 @@
 Name                                       Input            Program
 ------------                               -----            -------
 Hello, World                               Void             2
-Covfefify a string                         String
+Covfefify a string                         String           4
 No A. just CAPS LOCK                       String           2
 Don't google "google"                      String           1
-1, 2, Fizz. 4. Buzz.                       Void
+1, 2, Fizz. 4. Buzz.                       Void             6
 
 Is this number a prime?                    Integer          3
-Fibonacci function or sequence             Void/Integer
-You're on a 8 day streak!                  Integer
+Fibonacci function or sequence             Void/Integer     4
+You're on a 8 day streak!                  Integer          6
 Count up forever                           Void             3
 Am I a Rude Number?                        Integer          1
 
 Sing Happy Birthday                        Void
-Print a Tabula Recta!                      Void
+Print a Tabula Recta!                      Void             4
 Sing Baby Shark                            Void
-Build me a brick wall!                     Void
+Build me a brick wall!                     Void             5
 Hare Krishna                               Void
 
 Print last, middle, first                  Void
 
-Do you want to code a snowman              Integer
+Do you want to code a snowman              Integer          5
 It's my Birthday                           Integer          2
 In Honor of Adam West                      Void             1
 5 Favourite Letters                        Void/(String?)
