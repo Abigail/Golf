@@ -1,8 +1,8 @@
 Name                                       Input            Program
 ------------                               -----            -------
-Hello, World                               Void
+Hello, World                               Void             2
 Covfefify a string                         String
-No A. just CAPS LOCK                       String
+No A. just CAPS LOCK                       String           2
 Don't google "google"                      String           1
 1, 2, Fizz. 4. Buzz.                       Void
 
@@ -21,7 +21,7 @@ Hare Krishna                               Void
 Print last, middle, first                  Void
 
 Do you want to code a snowman              Integer
-It's my Birthday                           Integer
+It's my Birthday                           Integer          2
 In Honor of Adam West                      Void             1
 5 Favourite Letters                        Void/(String?)
 YouTube Comments                           String
