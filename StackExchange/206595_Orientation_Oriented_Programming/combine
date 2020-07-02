@@ -1,0 +1,157 @@
+#!/opt/perl/bin/perl
+
+use 5.026;
+
+use strict;
+use warnings;
+no  warnings 'syntax';
+
+use experimental 'signatures';
+
+use List::Util qw [max];
+
+my %separator = (
+    pl   =>   '=pod',
+    sh   =>   'exit;',
+);
+
+#
+# Combines up to 8 programs, so that orienting the result
+# results in the 8 different programs to be run.
+#
+
+my $ext = @ARGV ? shift @ARGV : "pl";
+
+my @programs;
+my @blocks;
+
+for my $n (1 .. 8) {
+    my $file = "program_$n.$ext";
+    $programs [$n] = -f $file ? [`cat $file`] : [];
+    #
+    # Remove any leading lines which are just comments;
+    # this allows us to put in some notes in the individual programs
+    # which won't show up in the results.
+    #
+    shift @{$programs [$n]} while @{$programs [$n]} &&
+                                    $programs [$n] [0] =~ /^#/;
+    s/\n//g foreach @{$programs [$n]};
+}
+
+#
+# Combine the programs pair wise:
+#   - Add separator to the first program
+#   - Make all lines of the two program the same length
+#   - Add a comment at the end of each line
+#   - Reverse the order of the second program
+#   - Concat the results into blocks
+#
+for (my $n = 1; $n < 8; $n += 2) {
+    push @{$programs [$n]} => "=pod";
+    my $max = max map {length} @{$programs [$n]}, @{$programs [$n + 1]};
+    $_ .= (" " x ($max - length)) . "#"
+            for @{$programs [$n]}, @{$programs [$n + 1]};
+    $blocks [$n / 2] = [@{$programs [$n]}, reverse @{$programs [$n + 1]}];
+}
+
+
+#
+# We will now rotate blocks 1, 2, and 3 by 90, 180 and 270 degrees clockwise.
+#
+{
+    my $rotated;
+    foreach my $x (keys @{$blocks [1]}) {
+        my @chars = split // => $blocks [1] [$x];
+        foreach my $y (keys @chars) {
+            $$rotated [$y] [$x] = $chars [$y];
+        }
+    }
+    $_ = join "" => map {$_ // " "} @$_ for @$rotated;
+    $blocks [1] = $rotated;
+}
+
+{
+    $_ = reverse $_ for    @{$blocks [2]};
+    $blocks [2] = [reverse @{$blocks [2]}];
+}
+
+{
+    my $rotated;
+    foreach my $x (keys @{$blocks [3]}) {
+        my @chars = split // => $blocks [3] [$x];
+        foreach my $y (keys @chars) {
+            $$rotated [$y] [$x] = $chars [$y];
+        }
+    }
+    $_ = join "" => map {$_ // " "} @$_ for @$rotated;
+    $blocks [3] = [reverse @$rotated];
+}
+
+#
+# Make sure we have at least as many lines in $blocks [1] as
+# we have in $blocks [0], and as many lines in $blocks [3] as
+# we have in $blocks [2]. Fill we empty lines if necessary.
+#
+for my $n (0, 2) {
+    if (@{$blocks [$n + 1]} < @{$blocks [$n]}) {
+        push @{$blocks [$n + 1]} => (" " x length $blocks [$n + 1] [0]) x
+                                    (@{$blocks [$n]} - @{$blocks [$n + 1]});
+    }
+}
+
+#
+# Calculate the width and height of the resulting program.
+#
+# Width will be max  (width  $block [0] + width  $block [1],
+#                     width  $block [2] + width  $block [3])
+#
+# Height will be max (height $block [0] + height $block [3],
+#                     height $block [1] + height $block [2]);
+
+my $Width  = max length ($blocks [0] [0]) + length ($blocks [1] [0]),
+                 length ($blocks [2] [0]) + length ($blocks [3] [0]);
+my $Height = max @{$blocks [0]} + @{$blocks [3]},
+                 @{$blocks [1]} + @{$blocks [2]};
+
+#
+# Time to print the result. We'll end with something like:
+#
+#    BLOCK0  SPACE1  BLOCK1    # Type 1
+#    BLOCK0  SPACE1  BLOCK1    # Type 1
+#            SPACE2  BLOCK1    # Type 2
+#            SPACE2  BLOCK1    # Type 2
+#    BLOCK3  SPACE3  BLOCK1    # Type 3
+#    BLOCK3  SPACE3  BLOCK1    # Type 3
+#    BLOCK3  SPACE4            # Type 4
+#    BLOCK3  SPACE4            # Type 4
+#    BLOCK3  SPACE5  BLOCK2    # Type 5
+#    BLOCK3  SPACE5  BLOCK2    # Type 5
+#
+# The number of Type 1 lines is @{$blocks [0]}.
+# The number of Type 2 lines is $Height - @{$blocks [0]} - @{$blocks [3]}.
+# The number of Type 3 lines is @{$blocks [1]} + @{$blocks [3]} - $Height.
+# The number of Type 4 lines is $Height - @{$blocks [1]} - @{$blocks [2]}.
+# The number of Type 5 lines is @{$blocks [2]}.
+# 
+
+my $space1 = " " x ($Width - length ($blocks [0] [0]) - length $blocks [1] [0]);
+my $space2 = " " x ($Width                            - length $blocks [1] [0]);
+my $space3 = " " x ($Width - length ($blocks [3] [0]) - length $blocks [1] [0]);
+my $space4 = " " x ($Width - length ($blocks [3] [0]));
+my $space5 = " " x ($Width - length ($blocks [3] [0]) - length $blocks [2] [0]);
+my $type1  = @{$blocks [0]};
+my $type2  = $Height - (@{$blocks [0]} + @{$blocks [3]});
+my $type3  =           (@{$blocks [1]} + @{$blocks [3]}) - $Height;
+my $type4  = $Height - (@{$blocks [1]} + @{$blocks [2]});
+my $type5  = @{$blocks [2]};
+
+
+say shift @{$blocks [0]}, $space1, shift @{$blocks [1]} for 1 .. $type1;
+say                       $space2, shift @{$blocks [1]} for 1 .. $type2;
+say shift @{$blocks [3]}, $space3, shift @{$blocks [1]} for 1 .. $type3;
+say shift @{$blocks [3]}, $space4                       for 1 .. $type4;
+say shift @{$blocks [3]}, $space5, shift @{$blocks [2]} for 1 .. $type5;
+
+
+
+__END__
