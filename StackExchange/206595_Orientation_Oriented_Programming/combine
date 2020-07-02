@@ -45,6 +45,7 @@ for my $n (1 .. 8) {
 #   - Add a comment at the end of each line
 #   - Reverse the order of the second program
 #   - Concat the results into blocks
+#   - Add a row of comment characters to the beginning and end
 #
 for (my $n = 1; $n < 8; $n += 2) {
     push @{$programs [$n]} => "=pod";
@@ -52,6 +53,8 @@ for (my $n = 1; $n < 8; $n += 2) {
     $_ .= (" " x ($max - length)) . "#"
             for @{$programs [$n]}, @{$programs [$n + 1]};
     $blocks [$n / 2] = [@{$programs [$n]}, reverse @{$programs [$n + 1]}];
+    push @{$blocks [$n / 2]} => "#" x length $blocks [$n / 2] [0];
+    unshift @{$blocks [$n / 2]}, $blocks [$n / 2] [-1];
 }
 
 
