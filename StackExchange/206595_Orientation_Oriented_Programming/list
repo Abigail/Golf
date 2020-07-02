@@ -1,0 +1,33 @@
+Name                                       Input            Program
+------------                               -----            -------
+Hello, World                               Void
+Covfefify a string                         String
+No A. just CAPS LOCK                       String
+Don't google "google"                      String           1
+1, 2, Fizz. 4. Buzz.                       Void
+
+Is this number a prime?                    Integer
+Fibonacci function or sequence             Void/Integer
+You're on a 8 day streak!                  Integer
+Count up forever                           Void
+Am I a Rude Number?                        Integer          1
+
+Sing Happy Birthday                        Void
+Print a Tabula Recta!                      Void
+Sing Baby Shark                            Void
+Build me a brick wall!                     Void
+Hare Krishna                               Void
+
+Print last, middle, first                  Void
+
+Do you want to code a snowman              Integer
+It's my Birthday                           Integer
+In Honor of Adam West                      Void             1
+5 Favourite Letters                        Void/(String?)
+YouTube Comments                           String
+
+
+
+Void:     (10), 11, (12)
+Integer:  5, 6
+String:   4, (5?)
