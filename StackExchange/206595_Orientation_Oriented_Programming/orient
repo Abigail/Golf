@@ -9,9 +9,14 @@ no  warnings 'syntax';
 use experimental 'signatures';
 
 use List::Util qw [max];
+use Getopt::Long;
 
-foreach my $ext (qw [pl bf]) {
+
+my @extentions = @ARGV ? @ARGV : qw [pl bf sh];
+
+foreach my $ext (@extentions) {
     my $solution               =  "solution.$ext";
+    next unless -f $solution;
     my $solution_hflip         =  "solution-hflip.$ext";
     my $solution_vflip         =  "solution-vflip.$ext";
     my $solution_dflip         =  "solution-dflip.$ext";
