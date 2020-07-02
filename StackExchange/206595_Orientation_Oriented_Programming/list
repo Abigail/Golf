@@ -6,10 +6,10 @@ No A. just CAPS LOCK                       String           2
 Don't google "google"                      String           1
 1, 2, Fizz. 4. Buzz.                       Void
 
-Is this number a prime?                    Integer
+Is this number a prime?                    Integer          3
 Fibonacci function or sequence             Void/Integer
 You're on a 8 day streak!                  Integer
-Count up forever                           Void
+Count up forever                           Void             3
 Am I a Rude Number?                        Integer          1
 
 Sing Happy Birthday                        Void
@@ -24,7 +24,7 @@ Do you want to code a snowman              Integer
 It's my Birthday                           Integer          2
 In Honor of Adam West                      Void             1
 5 Favourite Letters                        Void/(String?)
-YouTube Comments                           String
+YouTube Comments                           String           3
 
 
 
