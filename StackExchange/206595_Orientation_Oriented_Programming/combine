@@ -49,10 +49,11 @@ for my $n (1 .. 8) {
 #
 for (my $n = 1; $n < 8; $n += 2) {
     push @{$programs [$n]} => "=pod";
-    my $max = max map {length} @{$programs [$n]}, @{$programs [$n + 1]};
+    my ($p, $q) = $n == 1 || $n == 5 ? ($n, $n + 1) : ($n + 1, $n);
+    my $max = max map {length} @{$programs [$p]}, @{$programs [$q]};
     $_ .= (" " x ($max - length)) . "#"
-            for @{$programs [$n]}, @{$programs [$n + 1]};
-    $blocks [$n / 2] = [@{$programs [$n]}, reverse @{$programs [$n + 1]}];
+            for @{$programs [$p]}, @{$programs [$q]};
+    $blocks [$n / 2] = [@{$programs [$p]}, reverse @{$programs [$q]}];
     push @{$blocks [$n / 2]} => "#" x length $blocks [$n / 2] [0];
     unshift @{$blocks [$n / 2]}, $blocks [$n / 2] [-1];
 }
