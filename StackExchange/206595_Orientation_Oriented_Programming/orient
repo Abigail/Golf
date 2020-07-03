@@ -15,15 +15,15 @@ use Getopt::Long;
 my @extentions = @ARGV ? @ARGV : qw [pl bf sh];
 
 foreach my $ext (@extentions) {
-    my $solution               =  "solution.$ext";
+    my $solution               =  "solution-000-0.$ext";
     next unless -f $solution;
-    my $solution_hflip         =  "solution-hflip.$ext";
-    my $solution_vflip         =  "solution-vflip.$ext";
-    my $solution_dflip         =  "solution-dflip.$ext";
-    my $solution_mirror        =  "solution-mirror.$ext";
-    my $solution_hflip_mirror  =  "solution-hflip-mirror.$ext";
-    my $solution_vflip_mirror  =  "solution-vflip-mirror.$ext";
-    my $solution_dflip_mirror  =  "solution-dflip-mirror.$ext";
+    my $solution_hflip         =  "solution-180-1.$ext";
+    my $solution_vflip         =  "solution-000-1.$ext";
+    my $solution_dflip         =  "solution-180-0.$ext";
+    my $solution_mirror        =  "solution-090-1.$ext";
+    my $solution_hflip_mirror  =  "solution-270-0.$ext";
+    my $solution_vflip_mirror  =  "solution-090-0.$ext";
+    my $solution_dflip_mirror  =  "solution-270-1.$ext";
 
     open my $fh, "<", $solution or die "open: $!";
 
