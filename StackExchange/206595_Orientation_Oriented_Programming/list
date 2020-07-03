@@ -14,7 +14,7 @@ Am I a Rude Number?                        Integer          1
 
 Sing Happy Birthday                        Void             7
 Print a Tabula Recta!                      Void             4
-Sing Baby Shark                            Void
+Sing Baby Shark                            Void             8
 Build me a brick wall!                     Void             5
 Hare Krishna                               Void
 
@@ -28,6 +28,30 @@ YouTube Comments                           String           3
 
 
 
-Void:     (10), 11, (12)
-Integer:  5, 6
-String:   4, (5?)
+Orient   Input    Name
+------   -----    ----
+000-0    Void     In Honor of Adam West
+         Integer  Am I a Rude Number?
+         String   Don't google "google"
+
+000-1    Void     Hello, World!
+         Integer  It's my Birthday
+         String   No A. just CAPS LOCK
+
+090-0    Void     Count up forever
+         Integer  Is this number a prime?
+         String   YouTube Comments
+
+090-1    Void     Print a Tabula Recta!
+         Integer  Fibonacci function or sequence
+         String   Covfefify a string
+
+180-0    Void     Build me a brick wall!
+         Integer  Do you want to code a snowman
+         
+180-1    Void     1, 2, Fizz. 4. Buzz.
+         Integer  You're on a 8 day streak!
+
+270-0    Void     Sing Happy Birthday
+
+270-1    Void     Sing Baby Shark
