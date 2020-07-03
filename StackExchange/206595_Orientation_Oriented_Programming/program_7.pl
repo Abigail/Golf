@@ -4,6 +4,6 @@
 #             v          v
 $_="Happy Birt"
 ."hday to You";
-say;say;say s
-!to!Dear!r=~s
-!You!Perl!r;say
+say;say;say
+s!to!Dear!r=~
+s!You!Perl!r;say;
