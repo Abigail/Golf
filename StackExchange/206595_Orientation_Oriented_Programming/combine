@@ -29,6 +29,17 @@ my $FILLER  = "#";
 my @programs;
 my @blocks;
 
+sub rstr ($width) {
+    my $str = "";
+    $str .= chr (33 + int rand 94) for 1 .. $width;
+    $str;
+}
+
+my sub fill ($width) {
+    return $COMMENT x $width if $width < 3;
+    return $COMMENT . rstr ($width - 2) . $COMMENT;
+}
+
 for my $n (1 .. 8) {
     my $file = "program_$n.$ext";
     $programs [$n] = -f $file ? [`cat $file`] : [];
@@ -55,7 +66,8 @@ for (my $n = 1; $n < 8; $n += 2) {
     push @{$programs [$n]} => "=pod";
     my ($p, $q) = $n != 3 ? ($n, $n + 1) : ($n + 1, $n);
     my $max = max map {length} @{$programs [$p]}, @{$programs [$q]};
-    $_ .= ($FILLER x ($max - length)) . $COMMENT
+  # $_ .= ($FILLER x ($max - length)) . $COMMENT
+    $_ .= fill ($max - length) . $COMMENT
             for @{$programs [$p]}, @{$programs [$q]};
     $blocks [$n / 2] = [@{$programs [$p]}, reverse @{$programs [$q]}];
     push @{$blocks [$n / 2]} => "#" x length $blocks [$n / 2] [0];
@@ -149,14 +161,11 @@ my $Height = max @{$blocks [0]} + @{$blocks [3]},
 # The number of Type 5 lines is @{$blocks [2]}.
 # 
 
-my $space1 = $FILLER x ($Width - length ($blocks [0] [0])
-                               - length ($blocks [1] [0]));
-my $space2 = $FILLER x ($Width - length ($blocks [1] [0]));
-my $space3 = $FILLER x ($Width - length ($blocks [3] [0])
-                               - length ($blocks [1] [0]));
-my $space4 = $FILLER x ($Width - length ($blocks [3] [0]));
-my $space5 = $FILLER x ($Width - length ($blocks [3] [0])
-                               - length ($blocks [2] [0]));
+my $space1 = $Width - length ($blocks [0] [0]) - length ($blocks [1] [0]);
+my $space2 = $Width - length ($blocks [1] [0]);
+my $space3 = $Width - length ($blocks [3] [0]) - length ($blocks [1] [0]);
+my $space4 = $Width - length ($blocks [3] [0]);
+my $space5 = $Width - length ($blocks [3] [0]) - length ($blocks [2] [0]);
 my $type1  = @{$blocks [0]};
 my $type2  = $Height - (@{$blocks [0]} + @{$blocks [3]});
 my $type3  =           (@{$blocks [1]} + @{$blocks [3]}) - $Height;
@@ -164,11 +173,11 @@ my $type4  = $Height - (@{$blocks [1]} + @{$blocks [2]});
 my $type5  = @{$blocks [2]};
 
 
-say shift @{$blocks [0]}, $space1, shift @{$blocks [1]} for 1 .. $type1;
-say                       $space2, shift @{$blocks [1]} for 1 .. $type2;
-say shift @{$blocks [3]}, $space3, shift @{$blocks [1]} for 1 .. $type3;
-say shift @{$blocks [3]}, $space4                       for 1 .. $type4;
-say shift @{$blocks [3]}, $space5, shift @{$blocks [2]} for 1 .. $type5;
+say shift @{$blocks [0]}, fill ($space1), shift @{$blocks [1]} for 1 .. $type1;
+say                       fill ($space2), shift @{$blocks [1]} for 1 .. $type2;
+say shift @{$blocks [3]}, fill ($space3), shift @{$blocks [1]} for 1 .. $type3;
+say shift @{$blocks [3]}, fill ($space4)                       for 1 .. $type4;
+say shift @{$blocks [3]}, fill ($space5), shift @{$blocks [2]} for 1 .. $type5;
 
 
 
