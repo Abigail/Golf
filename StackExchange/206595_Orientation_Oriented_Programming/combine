@@ -98,8 +98,15 @@ for (my $n = 1; $n < 8; $n += 2) {
 #
 for my $n (0, 2) {
     if (@{$blocks [$n + 1]} < @{$blocks [$n]}) {
-        push @{$blocks [$n + 1]} => (" " x length $blocks [$n + 1] [0]) x
-                                    (@{$blocks [$n]} - @{$blocks [$n + 1]});
+        my $line  = " " x length $blocks [$n + 1] [0];
+        my $times = @{$blocks [$n]} - @{$blocks [$n + 1]};
+        my @add   = ($line) x $times;
+        if ($n == 0) {
+            push    @{$blocks [$n + 1]} => @add;
+        }
+        else {
+            unshift @{$blocks [$n + 1]} => @add;
+        }
     }
 }
 
