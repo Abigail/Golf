@@ -173,11 +173,15 @@ my $type4  = $Height - (@{$blocks [1]} + @{$blocks [2]});
 my $type5  = @{$blocks [2]};
 
 
-say shift @{$blocks [0]}, fill ($space1), shift @{$blocks [1]} for 1 .. $type1;
+say shift @{$blocks [0]}, ($COMMENT x $space1),
+                                          shift @{$blocks [1]}       if $type1;
+say shift @{$blocks [0]}, fill ($space1), shift @{$blocks [1]} for 2 .. $type1;
 say                       fill ($space2), shift @{$blocks [1]} for 1 .. $type2;
 say shift @{$blocks [3]}, fill ($space3), shift @{$blocks [1]} for 1 .. $type3;
 say shift @{$blocks [3]}, fill ($space4)                       for 1 .. $type4;
-say shift @{$blocks [3]}, fill ($space5), shift @{$blocks [2]} for 1 .. $type5;
+say shift @{$blocks [3]}, fill ($space5), shift @{$blocks [2]} for 2 .. $type5;
+say shift @{$blocks [3]}, ($COMMENT x $space5),
+                                          shift @{$blocks [2]}       if $type5;
 
 
 
