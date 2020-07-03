@@ -22,6 +22,10 @@ my %separator = (
 
 my $ext = @ARGV ? shift @ARGV : "pl";
 
+my $COMMENT = "#";
+my $SPACE   = " ";
+my $FILLER  = "#";
+
 my @programs;
 my @blocks;
 
@@ -51,7 +55,7 @@ for (my $n = 1; $n < 8; $n += 2) {
     push @{$programs [$n]} => "=pod";
     my ($p, $q) = $n != 3 ? ($n, $n + 1) : ($n + 1, $n);
     my $max = max map {length} @{$programs [$p]}, @{$programs [$q]};
-    $_ .= (" " x ($max - length)) . "#"
+    $_ .= ($FILLER x ($max - length)) . $COMMENT
             for @{$programs [$p]}, @{$programs [$q]};
     $blocks [$n / 2] = [@{$programs [$p]}, reverse @{$programs [$q]}];
     push @{$blocks [$n / 2]} => "#" x length $blocks [$n / 2] [0];
@@ -70,7 +74,7 @@ for (my $n = 1; $n < 8; $n += 2) {
             $$rotated [$y] [$x] = $chars [$y];
         }
     }
-    $_ = join "" => map {$_ // " "} @$_ for @$rotated;
+    $_ = join "" => map {$_ // $SPACE} @$_ for @$rotated;
     $blocks [1] = $rotated;
 }
 
@@ -87,7 +91,7 @@ for (my $n = 1; $n < 8; $n += 2) {
             $$rotated [$y] [$x] = $chars [$y];
         }
     }
-    $_ = join "" => map {$_ // " "} @$_ for @$rotated;
+    $_ = join "" => map {$_ // $SPACE} @$_ for @$rotated;
     $blocks [3] = [reverse @$rotated];
 }
 
@@ -98,7 +102,7 @@ for (my $n = 1; $n < 8; $n += 2) {
 #
 for my $n (0, 2) {
     if (@{$blocks [$n + 1]} < @{$blocks [$n]}) {
-        my $line  = " " x length $blocks [$n + 1] [0];
+        my $line  = $FILLER x length $blocks [$n + 1] [0];
         my $times = @{$blocks [$n]} - @{$blocks [$n + 1]};
         my @add   = ($line) x $times;
         if ($n == 0) {
@@ -145,11 +149,14 @@ my $Height = max @{$blocks [0]} + @{$blocks [3]},
 # The number of Type 5 lines is @{$blocks [2]}.
 # 
 
-my $space1 = " " x ($Width - length ($blocks [0] [0]) - length $blocks [1] [0]);
-my $space2 = " " x ($Width                            - length $blocks [1] [0]);
-my $space3 = " " x ($Width - length ($blocks [3] [0]) - length $blocks [1] [0]);
-my $space4 = " " x ($Width - length ($blocks [3] [0]));
-my $space5 = " " x ($Width - length ($blocks [3] [0]) - length $blocks [2] [0]);
+my $space1 = $FILLER x ($Width - length ($blocks [0] [0])
+                               - length ($blocks [1] [0]));
+my $space2 = $FILLER x ($Width - length ($blocks [1] [0]));
+my $space3 = $FILLER x ($Width - length ($blocks [3] [0])
+                               - length ($blocks [1] [0]));
+my $space4 = $FILLER x ($Width - length ($blocks [3] [0]));
+my $space5 = $FILLER x ($Width - length ($blocks [3] [0])
+                               - length ($blocks [2] [0]));
 my $type1  = @{$blocks [0]};
 my $type2  = $Height - (@{$blocks [0]} + @{$blocks [3]});
 my $type3  =           (@{$blocks [1]} + @{$blocks [3]}) - $Height;
