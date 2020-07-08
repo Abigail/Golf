@@ -1,0 +1,42 @@
+# [Find the perfect square!][codegolf]
+
+Your task is to turn a square root like this: &#x221A;12
+into a form like this: 2&#x221A;3.
+
+For our purpose, we only need to output the left number here:
+
+    2
+
+## Test cases
+
+    4   -> 2
+    9   -> 3
+    12  -> 2
+    13  -> 1
+    108 -> 6
+
+Specifications
+
+* You may assume for the input that `n > 0`. `n` has to be as large
+  as possible.
+* If the number is already a perfect square, do this:
+  &#x221A;4 = 2&#x221A; -> 2
+
+* If the number doesn't contain perfect squares, do this:
+  &#x221A;13 = 1&#x221A;13 -> 1
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/206853/find-the-perfect-square
+
+
+## Solutions
+
+### Perl
+
+Find all the number less than the target number whose square
+divides the target number evenly. Pick the largest.
+
+### bc
+
+Find the first number less than the target number whose square
+divides the target number evenly.

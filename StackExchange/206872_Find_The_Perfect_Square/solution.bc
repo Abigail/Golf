@@ -1,0 +1,1 @@
+define f(n){for(i=n;i--;){if(!(n%(i*i))){return i}}}
