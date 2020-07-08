@@ -1,0 +1,35 @@
+# [Find the discrete logarithm][codegolf]
+
+## Task
+
+Write a program/function that when given 3 positive integers `a`, `b`, and
+`m` as input outputs a positive integer `x` such that 
+`a^x == b (mod m)` or that no such `x` exists.
+
+A reference implementation can be found here.
+
+## Constraints
+
+You can expect `a` and `b` to be less than `m`.
+
+## Scoring
+
+This is code-golf so shortest bytes wins.
+
+## Sample Testcases
+
+    # a, b, m -> x
+
+    10, 10, 50 -> 1
+    10, 100, 200 -> 2
+    10, 1, 127 -> 42
+    35, 541, 1438 -> 83
+    35, 541, 1438 -> 1519
+    1816, 2629, 3077 -> 223
+    3306, 4124, 5359 -> 1923
+    346, 406, 430 -> None
+
+Note: in the third testcase the solution cannot be 0 since the
+solution has to be a positive number.
+
+[codegolf]: https://codegolf.stackexchange.com/questions/206694/find-the-discrete-logarithm
