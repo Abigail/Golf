@@ -1,18 +1,18 @@
-# [Music with pi and e(eulers number)][codegolf]
+# [Music with &pi; and &#x03B5;(Eulers number)][codegolf]
 
-Because I forgot to celebrate the pi-day(14.3) lets celebrate with
-pi, e and music!
+Because I forgot to celebrate the &pi;-day(14.3) lets celebrate with
+&pi;, &#x03B5; and music!
 
 ## Challenge
 
-No, we don't have time to eat a pi-pizza, lets make a program.  What
-you need is 500 digits of pi, and 10 digits of e.  The User gives
+No, we don't have time to eat a &pi;-pizza, lets make a program.  What
+you need is 500 digits of &pi;, and 10 digits of e.  The User gives
 any digit from 0-499 through an input or a function.
 
-Then you should loop through the digits of pi (number of digits are
+Then you should loop through the digits of &pi; (number of digits are
 based on the input from the user):
 
-If your current pi digit is:
+If your current &pi; digit is:
 
 * 0 then the note is C
 * 1 then the note is D
@@ -25,16 +25,16 @@ If your current pi digit is:
 * 8 then the note is D'
 * 9 then the note is E'
 
-Then, Based on your current pi-digit go to your e-digit: If the
-pi-digit is 0, go to the 1 e-digit If the pi-digit is 1, go to the
+Then, Based on your current &pi;-digit go to your e-digit: If the
+&pi;-digit is 0, go to the 1 e-digit If the &pi;-digit is 1, go to the
 2 e-digit...
 
-You need only 10 digits of e, because your current
-pi digit can only be a number between 0-9.
+You need only 10 digits of &#x03B5;, because your current
+&pi; digit can only be a number between 0-9.
 
 Return or print a tuple or list (if your language doesn't have tuples):
-With the first element your note made from pi.
-And the second element e-digit divided by 4 as beats.
+With the first element your note made from &pi;.
+And the second element &#x03B5;-digit divided by 4 as beats.
 
 ## Test cases
 
@@ -60,7 +60,7 @@ And the second element e-digit divided by 4 as beats.
 
 ## Notes:
 
-### Pi
+### &pi;
 
     3 -> Doesn't count
     . -> Doesn't count
@@ -68,7 +68,7 @@ And the second element e-digit divided by 4 as beats.
     4 -> 1th digit
     ...
 
-### e
+### &#x03B5;
 
     2 -> Doesn't count
     . -> Doesn't count
@@ -90,9 +90,9 @@ This gets the input (which is in `$_` due to the `-p` switch; the
     $_ = $p -> bpi;
     s/..//;
 
-This gets us the 500 required digits from \$\pi\$. First we create
+This gets us the 500 required digits from &pi;. First we create
 a `Math::BigFloat` object, give it an accuracy of 500 (so, 500
-decimals behind the comma). We then query the object to get \$\pi\$,
+decimals behind the comma). We then query the object to get &pi;,
 which we store in `$_`. And we then remove the first two characters,
 to set rid of the leading `3.`.
 
@@ -102,14 +102,14 @@ to set rid of the leading `3.`.
       ")\n"
       !eg
 
-This does the majority of the work. We take each digit of \$\pi\$
+This does the majority of the work. We take each digit of &pi;
 and replace it with the result of the middle three lines of code
 above. During the replacement, the digit being replaced is in `$&`.
 We start with an opening paren, then we look up the note by using
 the current digit as in index into a string (`substr (CDEFGABCDE,
 $&, 1)`. If the digit is greater than 6, we need to add a prime
 (`("'" x ($& > 6))`). We then add a comma. Then, to get the beat,
-we index into the digits of \$\epsilon\$, and divide by four
+we index into the digits of &#x03B5;, and divide by four
 (`((substr  7182818284, $&, 1) / 4)`). Finally, we add an closing
 paren and a newline.
 
