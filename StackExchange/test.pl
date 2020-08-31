@@ -120,6 +120,9 @@ foreach my $solution (@solutions) {
             #
             s/\n$// for @got;
             s/\n$// for @exp;
+            if (@got < @exp) {
+                push @got => (0) x (@exp - @got);
+            }
             @exp = map {$_ ? 1 : 0} @exp;
             @got = map {$_ ? 1 : 0} @got;
         }
