@@ -1,0 +1,70 @@
+# [Are they connected by a Brussels choice?][challenge]
+
+Background
+
+Two numbers, `a` and `b`, are said to be connected by a Brussels
+choice operation* if `b` can be reached from `a` by doubling or
+halving (if even) a substring (the substring must not be empty and
+may not contain any leading 0s but it can be 0) in the base-10
+representation of `a`.
+
+*This operation is slightly different from the one defined on this
+paper mainly that the operation defined in the paper allows empty
+substrings and does not allow choosing the substring "0"
+
+For example, all the number that can be reached from 5016:
+
+    508     (50[16] half   -> 50[8])
+    2508    ([5016] half   -> [2508])
+    2516    ([50]16 half   -> [25]16)
+    5013    (501[6] half   -> 501[3])
+    5016    (5[0]16 half   -> 5[0]16)
+            (5[0]16 double -> 5[0]16)
+    5026    (50[1]6 double -> 50[2]6)
+    5032    (50[16] double -> 50[32])
+    10016   ([5]016 double -> [10]016)
+            ([50]16 double -> [100]16)
+    10026   ([501]6 double -> [1002]6)
+    10032   ([5016] double -> [10032])
+    50112   (501[6] double -> 501[12])
+
+## Task
+
+Write a program/function that when given two positive integers as
+input outputs a truthy value if they can reach each other with a
+single Brussels choice operation and a falsey value otherwise.
+Scoring
+
+This is code-golf so shortest bytes wins.
+
+### Sample Testcases
+
+    2, 4       -> Truthy
+    4, 2       -> Truthy
+    101, 101   -> Truthy
+    516, 58    -> Truthy
+    58, 516    -> Truthy
+    516, 5112  -> Truthy
+    5112, 516  -> Truthy
+
+    1, 3       -> Falsey
+    123, 123   -> Falsey
+    151, 252   -> Falsey
+    112, 221   -> Falsey
+    101, 999   -> Falsey
+    999, 1001  -> Falsey
+    101, 1001  -> Falsey
+
+[challenge]: https://codegolf.stackexchange.com/questions/210126/are-they-connected-by-a-brussels-choice/
+
+## Solution
+
+We take every possible, non-empty, substring of the first number;
+this will be in available in `$&`. The part of the first number
+which proceeds the current substring is in ``$` ``, the part after
+it is in `$'`. We then create two new strings, by either multiplying
+the substring by 2, or dividing it by 2, and sandwiching it between
+``$` `` and `$'`. We then compare this with the second number, and
+print `$=` if there is a match (`$=` by default contains 60). Note
+that if the substring is odd, the resulting string will contain a
+decimal point, and hence, will not match with the second number.
