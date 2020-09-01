@@ -1,0 +1,155 @@
+# [De-interleave log lines: HARD MODE][challenge]
+
+In the face of some regrettable rules that turned the original into
+a glorified sorting task, I am posting a more challenging variant.
+Shout out to Luis Mendo for the suggestion of how to improve the
+original challenge.
+
+You've inherited a server that runs several apps which all output
+to the same log.
+
+Your task is to de-interleave the lines of the log file by source.
+Fortunately for you, the person who wrote all the apps was nice
+enough to leave tags indicating their source.
+
+## Logs
+
+Each line will look something like this:
+
+    [app_name] Something horrible happened!
+
+* App tags are always between square brackets and will contain only
+  alphanumeric characters and underscores.
+* App tags are nonempty
+* There may be other square brackets later on any given line, but
+  none will form a valid tag.
+* There will always be at least one non-space character after a tag.
+* The log as a whole may be empty.
+* There is no limit to how many unique app tags will be present in the file.
+
+In some cases, an app tag may be missing. When this is the case,
+the log line belongs to the most recently logged app.
+
+* The first line of the log will always begin with an app tag
+* A line beginning with [ is not necessarily tagged. If there is an
+  invalid character between the initial square brackets or no ], then
+  the line is not tagged.
+* No empty lines appear in the log
+
+## Expected Output
+
+You should output several fully-separated logs with the app tags
+removed from each log line where they were present. You do not need
+to preserve leading whitespace on any log line.
+
+Output logs must be in some sort of key-value mapping or reasonable
+equivalent. A non-exhaustive list of valid output formats:
+
+* A file named after the app tag for each app
+    * You may assume that the output files do not already exist in
+      the output directory in this case.
+* A dictionary/map/hash/whatever that uses app tags as keys and a
+  newline-separated string of the log lines as values.
+* A long concatenated string separated by blank lines and preceded by app tags
+* A list of [key, value] lists
+* A JSON string with app tags as keys and arrays of log lines as values
+* A Markdown document with app tags as headers and leading #s of any line
+  escaped with backslashes.
+* A Javascript function that takes a string as input and outputs the
+  associated log as a newline-separated string.
+
+Basically, if you can't tell which app the log lines came from, the
+output is invalid.
+
+## Example
+
+An entire log might look like this:
+
+    [weather] Current temp: 83F
+    [barkeep] Fish enters bar
+    Fish orders beer
+    [stockmarket] PI +3.14
+    [PI announced merger with E]
+    [barkeep] Fish leaves bar
+    [weather] 40% chance of rain detected
+    [ I have a lovely bunch of coconuts
+
+Which should output three different logs:
+
+    weather:
+
+        Current temp: 83F
+        40% chance of rain detected
+        [ I have a lovely bunch of coconuts
+
+    barkeep:
+
+        Fish enters bar
+        Fish orders beer
+        Fish leaves bar
+
+    stockmarket:
+
+        PI +3.14
+        [PI announced merger with E]
+
+You are not given the names of the app tags ahead of time. You must
+determine them only by analyzing the log file.
+
+
+
+
+## Solution
+
+### [Perl][perl]
+
+First, the effect of the `-n` switch. This causes Perl to wrap the
+program in a loop, which reads the input and executes the body for
+each line. But it does so in a very unsophisticated way, it wraps
+the body in the loop before doing any parsing, as follows:
+
+    perl -ne 'TEXT'
+
+gets turned into
+
+    LINE: while (defined($_ = readline ARGV)) {
+        TEXT;
+    }
+
+But that means if your `TEXT` is of the form `LOOP_BODY}{FINAL_STATEMENT`,
+you end up with the program:
+
+    LINE: while (defined($_ = readline ARGV)) {
+        LOOP_BODY
+    }
+    {
+        FINAL_STATEMENT;
+    }
+
+We're using this trick just to save a few bytes over an `END` block.
+
+In the program itself, we're using two variables to do our bookkeeping.
+`$;` will contain the current tag, and in the hash `%;`, we track
+the lines for each tag. Now, for each line of the input, we check
+to see if it starts with a tag, and if so, we strip it off from the
+line, and remember the tag:
+
+    $; = $1 if          # Remember the tag if,
+    s/^\[(\w+)\] +//;   # we can strip of a tag
+
+We then concatenate the current line (stripped from a tag, if
+present) to the set of lines already collected for that tag -- if
+there are no such lines, we effectively concatenate it with the
+empty string:
+
+    $;{$;}.=$_          # Remember the current line
+
+Finally, after reading all lines, we print the hash. Perl conveniently
+flattens a hash to a simple list if you treat it as a list, alternating
+the keys and values. This gives us output where each section is
+separated by a newline, and is headed by the tag.
+
+    say for%;           # Print the flattened hash
+
+[challenge]: https://codegolf.stackexchange.com/questions/210051/de-interleave-log-lines-hard-mode
+[perl]: https://tio.run/##XY9Ba8MwDIXv@RXvkMJGabPSDsZCTmOFHga7O9lwHWUOTewgOw2l9K/Pc7vDYDc96b1P0kDcPYaQ5kW6QtvAZR@luCun@X1ZYZ5leZqf0/yyLNLPy9nJExrLszwEMZH0mrjCy8hMxsNTPzzjab1NxF7ygWiosG2dRhwSO8RmctOW65sm4kQ4b9Whv/p9hfcd5uvlapOIWElj7GgU1eiJv4gxtV7jtfqP70ge6Rf/d9TmYQalZYzDNmDZGtTkSXmqE4EddMxAorNH6k7Yxz36alRWWTN6l3zbwbfWuLB4ayJzZCri82FhfgA "Perl 5 – Try It Online"
