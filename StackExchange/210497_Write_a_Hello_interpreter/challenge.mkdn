@@ -1,0 +1,85 @@
+# [Write a "Hello" interpreter][challenge]
+
+## Background
+
+Hello is a language "written" by Anne Veling, which errors if the
+program does not contain only h, and will print `Hello World` for
+every `h`
+
+## Task
+
+You are to write an interpreter/compiler for Hello.
+
+## Example in Python
+
+    import os
+    i = input("Program: ")
+    for a in i:
+        if a != 'h':
+            print("err")
+            quit()
+        else:
+            print("Hello World")
+
+## Details
+
+* If the program is not only `h`s, it must print `err` or `error`
+  (case-insensitive).
+* You may throw an error, as long as you print `err`/`error` before throwing,
+  or by using a custom error builtin, like `raise SyntaxError('err')`
+  in Python. (basically, you have to *purposefully* error with `err`/`error`.
+* Assume the program will not be empty.
+* Output can have a trailing newline, space, or nothing to separate
+  `Hello World`s.
+* If a program has multiple lines, it should error (due to `\n` not being
+  an `h`).
+* You can assume that input will always be ASCII 33-126 and 10 (decimal).
+* The `h`s are case sensitive (so `H` is not a valid program).
+* It's okay if you print `Hello World`s before your program discovers a
+  non-h character and errors, however, the program must halt if a non-h
+  instruction is found.
+* This is code-golf, shortest answer wins.
+
+## Test cases
+
+    Input:    h
+    Output:   Hello World
+
+    Input:    hhhhhh
+    Output:   Hello WorldHello WorldHello WorldHello WorldHello WorldHello World
+        (again, it doesn't matter whether it's spaces, newlines,
+         or nothing to separate `Hello World`s)
+
+    Input:    rubbish
+    Output:   err
+
+    Input:    huh
+    Output:   Hello Worlderr
+       Or:    err
+
+
+## Solution
+
+### Befunge-93
+
+    ~                         # Read a character.
+
+    :1+!                      # Check whether we read -1 (end of input);
+                              # this leaves 1 on the stack if we are at 
+                              # the end of the input, else 0.
+
+    #v_                       # Exit the program if we're at the end
+     @                        # end of the input.
+
+    "h"-                      # Compare the read character with the
+                              # character "h", if equal, we leave 0 on
+                              # the stack, otherwise, non-zero.
+
+              #v_             # If we read anything but "h", print "err"
+    @,,,@#"err"<              # and exit the program.
+
+    "dlroW olleH",,,,,,,,,,,  # Print "Hello World"
+
+
+[challenge]: https://codegolf.stackexchange.com/questions/210497/write-a-hello-interpreter/
+[befunge]: https://tio.run/##S0pNK81LT/3/v87KUFtRuSxeKUNJF0Sl5BTlhyvk5@SkeijpIICCApeCggOQ4aCslFpUpGTz/39GRgYA
