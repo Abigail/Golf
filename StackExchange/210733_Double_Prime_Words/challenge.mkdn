@@ -1,0 +1,78 @@
+# [Double Prime Words][challenge]
+
+Consider a word/string of length `n`, only including the letters
+A-Z, a-z. A word/string is a double prime word if and only if n is
+prime and the sum of the letters, s, is also prime, using their
+numeric position in the alphabet (`a = 1`, `B = 2`, `c = 3`, etc.).
+
+Input can be any combination of upper or lower case alphabetic
+characters, as there is no numeric difference between `a` or `A`.
+
+Output is any appropriate logical format related to your language.
+i.e. True or False, T or F, 1 or 0, etc. Specifying what format
+your output will appear is highly appreciated, but not required.
+(Output need not include n, s, but I include them below as demonstration
+and example)
+
+Winning condition is shortest code in bytes able to detect if a
+string is a double prime, fitting both conditions for n and s to
+be prime. (I've now included cases from all 4 possible situations
+of n, s.)
+
+## Examples
+
+    Input -> Output (n, s)
+
+    Prime -> True (5, 61)
+    han -> True (3, 23)
+    ASK -> True (3, 31)
+    pOpCoRn -> True (7, 97)
+    DiningTable -> True (11, 97)
+    METER -> True (5, 61)
+
+    Hello -> False (5, 52)
+    SMILE -> False (5, 58)
+    frown -> False (5, 76)
+
+    HelpMe -> False (6, 59)
+    John -> False (4, 47)
+    TwEnTy -> False (6, 107)
+
+    HelloWorld -> False (10, 124)
+    Donald -> False (6, 50)
+    telePHONES -> False (10, 119)
+
+
+## Solution
+
+### [Perl][solution]
+
+
+    s/[^a-z]//gi;                    # Clean the input, remove anything
+                                     # which isn't an ASCII letter.
+
+                              uc;    # Upper case the string
+                      split//,       # Split it into individual characters
+              -64+ord                # Calculate its value: 
+                                     #        subtract 64 from its ASCII value
+           map                       # Do this for each character, return a list
+    $m=sum                           # Sum the values, and store it in $m
+
+         y===c                       # Returns the length of the input string
+    (1 x y===c)                      # Length of the input string in unary
+
+    /^(11+)\1+$|^1$/                 # Match a string consisting of a composite
+                                     # number of 1's, or a single 1
+    !~                               # Negates the match, so
+    (1 x y===c)1~/^(11+)\1+$|^1$/    # this is true of the input string (after
+                                     # cleaning) has prime length
+
+    (1x$m)!~/^(11+)\1+$/             # Similar for the sum of the values --
+                                     # note that the value is at least 2, so
+                                     # no check for 1.
+
+Combining this, and the program will print 1 on lines which match
+the conditions, and an empty line for lines which do not match.
+
+[challenge]: https://codegolf.stackexchange.com/questions/210733/double-prime-words/
+[solution]: https://tio.run/##bY5NC4IwAEDv@xULhigqY1AdlB06CEEJ0QcdKkN01GBzY5tgEf30Ft46dHu8d3maGTHz3uJTVafPC8Y3niNJbS@hrHU6n8bKtInVgjuMk77J0ZWGBA7wQSltoskbVyEhcXQmMXpVBOEgCMmA5G9B2PuN4ZKBe92BxW4FlkwIBY/KiHZkDUsGymJfbD9KO64669Nyza3LsoPjYrz5I7T4Ag
