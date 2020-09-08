@@ -1,0 +1,55 @@
+# [Find the largest banknote][challenge]
+
+Banknotes in many countries come in denominations of 1, 2, 5, 10,
+20, 50, 100, 200, 500, 1000, etc. That is, one of {1,2,5} times a
+power of 10. This is [OEIS A051109][oeis], except we'll extend the
+sequence to bigger values.
+
+Given a positive integer as the input, the program should output
+the largest bank note that is less than or equal to the input. The
+input will be less than 2^63.
+
+### Examples:
+
+    1 => 1
+    2 => 2
+    3 => 2
+    5 => 5
+    9 => 5
+    42 => 20
+    49 => 20
+    50 => 50
+    99 => 50
+    100 => 100
+    729871 => 500000
+    3789345345234 => 2000000000000
+    999999999999999999 => 500000000000000000
+
+
+## Solution
+
+### [Befunge][solution]
+
+We first look at the first character, if it's greater than `4`, we
+print `5`, if it's greater than `1` we print `2`, else we print
+`1`. Then, for each following character on the input, we print a 0:
+
+    ~:"4"`!#v_"5">,     # If the first character is greater than 4, print a 5
+
+    ~:"4"`!#v_   >,     # If the first character isn't greater than 4,
+    v     >#< "2"^      # but is greater than 1, print a 2
+    >"1"`#^_ 
+
+    ~:"4"`!#v_   >,     # If the first character isn't greater than 4,
+    v     >#<    ^      # and isn't greater than 1, print a 1
+    >"1"`#^_  "1"^   
+
+    >,~1+#v_@           # In a loop (mind, the loop is entered at the ~)
+    ^"0"  <             # for each character on the input, print a 0;
+                        # terminate the program when there is no more input.
+
+
+
+[challenge]: https://codegolf.stackexchange.com/questions/210671/find-the-largest-banknote
+[oeis]: https://oeis.org/A051109
+[solution]: https://tio.run/##FcY7DoAgEAXAnlOsj1ILFjF@QognAWKCdnZacvUVp5qjnM99FZG6wSF3@k2YEIbKfeuuXvoF7QkWEQZEXgUwso6JqCWKzGxHZ3i1Swu7Dw
