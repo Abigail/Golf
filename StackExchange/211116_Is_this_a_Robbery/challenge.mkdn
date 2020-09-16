@@ -1,0 +1,4 @@
+# [Is this a Robbery?][codegolf]
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/211116/is-this-a-robbery
