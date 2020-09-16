@@ -1,0 +1,58 @@
+# [Implement the random Fibonacci sequence][codegolf]
+
+The random Fibonacci sequence is defined as follows:
+
+    f_n = f_(n-1) + f_(n-2) with probability 1/2
+          f_(n-1) - f_(n-2) with probability 1/2
+          
+i.e. whether the next term is the sum or difference of the previous
+two is chosen at random, independently of previous terms. Your task
+is to implement this sequence.
+
+Each random realization of the sequence must use consistent values.
+For example, if `f_3 = 2`, `f_4` must then be either `2 + 1 + 3`
+or `2 - 1 = 1`. This can be thought of as the sequence "remembering"
+previous values. This means that this example program is invalid,
+as previous values in the sequence are not maintained by later
+values. Furthermore, you should explain how your program meets the
+1/2 probability requirement.
+
+As is standard for sequence challenges, you can perform one of three tasks:
+
+    * Take a positive integer `n` as input and output `f_n`.
+    * Take a positive integer `n` as input and output `f_1`, `f_2`, ..., `f_n`.
+    * Output the sequence indefinitely with no end.
+
+Again, as is standard, you may use either 0 or 1 indexing, but the
+two initial values `f_1 = f_2 = 1` must be used.
+
+This is code-golf, so the shortest code, in bytes, wins.
+
+## Examples
+
+    n -> possible values of f_n | probabilities of values
+    1 -> 1                      | 1
+    2 -> 1                      | 1
+    3 -> 2, 0                   | 1/2, 1/2
+    4 -> 3, 1, -1               | 1/4, 1/2, 1/4
+    5 -> 5, 3, 1, -1            | 1/8, 1/8, 3/8, 3/8
+    6 -> 8, 4, 2, 0, -2         | 1/16, 1/8, 1/4, 5/16, 1/4
+
+
+## Solution
+
+### [Perl][tio-perl]
+
+First trick is the command line switch `-061`. This sets the input
+record to `1` (as the ASCII value of `1` is 49, aka 61 in octal).
+The input record separator is `$/`.
+
+We then use two variables to keep state, `$y`, which initially is
+undefined, but Perl will treat that as `0` when used as a number.
+`$/` is set to `1`, as discussed above. In an infinite loop, we set
+`$y` to `$/`, and `$/` to `$y + $/`, and then, with probability .5,
+subtract `2 * $y` from the latter. We then print `$/`.
+
+
+[codegolf]: https://codegolf.stackexchange.com/questions/211166/implement-the-random-fibonacci-sequence/
+[tio-perl]: https://tio.run/##K0gtyjH9/79aQ6VSR0Vf01ZDRR9Ia6tU6hppqVRqaeiZ2hQl5qVoaloXJ1aq6FsXpabk1/7//y@/oCQzP6/4v66BmeF/XV9TPQNDAwA
