@@ -24,6 +24,8 @@ foreach my $solution (@solutions) {
     my @options;
     my $is_bool;
     my %post_process;
+    my %test_numbers;
+    my $sets_tests;
     my $size = 0;
 
     foreach (@prog) {
@@ -41,6 +43,10 @@ foreach my $solution (@solutions) {
         elsif ($key =~ /^P(?:ost)?$/) {
             $post_process {lc $args} = 1;
         }
+        elsif ($key =~ /^Tests?$/) {
+            $sets_tests = 1;
+            $test_numbers {$_} = 1 for $args =~ /[0-9]+/g;
+        }
     }
 
     my %seen;
@@ -49,6 +55,7 @@ foreach my $solution (@solutions) {
     my @inputs;
     my @outputs;
     foreach my $number ("", @numbers) {
+        next if $sets_tests && !$test_numbers {$number || 0};
         #
         # Select the right inputs
         #
