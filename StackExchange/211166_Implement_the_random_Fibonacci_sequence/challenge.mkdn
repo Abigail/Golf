@@ -47,12 +47,12 @@ First trick is the command line switch `-061`. This sets the input
 record to `1` (as the ASCII value of `1` is 49, aka 61 in octal).
 The input record separator is `$/`.
 
-We then use two variables to keep state, `$y`, which initially is
-undefined, but Perl will treat that as `0` when used as a number.
+We then use two variables to keep state, `$,`, which initially is
+the empty string, but Perl will treat that as `0` when used as a number.
 `$/` is set to `1`, as discussed above. In an infinite loop, we set
-`$y` to `$/`, and `$/` to `$y + $/`, and then, with probability .5,
-subtract `2 * $y` from the latter. We then print `$/`.
+`$,` to `$/`, and `$/` to `$, + $/`, and then, with probability .5,
+subtract `2 * $,` from the latter. We then print `$,`.
 
 
 [codegolf]: https://codegolf.stackexchange.com/questions/211166/implement-the-random-fibonacci-sequence/
-[tio-perl]: https://tio.run/##K0gtyjH9/79aQ6VSR0Vf01ZDRR9Ia6tU6hppqVRqaeiZ2hQl5qVoaloXJ1aq6FsXpabk1/7//y@/oCQzP6/4v66BmeF/XV9TPQNDAwA
+[tio-perl]: https://tio.run/##K0gtyjH9/784sVJFpzwjMydVQ0VHR0Vf01ZDRR9Ia6vo6BppqehoaeiZ2hQl5qVoav7//y@/oCQzP6/4v66BmeF/XV9TPQNDAwA
