@@ -1,0 +1,60 @@
+# [Challenge][challenge]
+
+## Context
+
+Consider the following sequence of integers:
+
+    2, 10, 12, 16, 17, 18, 19, ...
+
+Can you guess the next term? Well, it is 200. What about the next? It
+is 201 ... In case it hasn't become obvious to you, this is the sequence
+of positive integers whose name starts with a letter D in Portuguese.
+
+## Task
+
+Given a positive integer `n`, decide if it belongs in the sequence or not.
+An algorithm to do so is given next to the Output section.
+
+## Input
+
+A positive integer `n`, no greater than 999999999.
+
+## Output
+
+A truthy/falsey value, representing whether or not the input belongs
+in the sequence. Truthy if it does, falsey if it doesn't. Truthy/falsey
+can't be switched for this challenge.
+
+For 0 < n < 10^9, here's how to determine if `n` is part of the sequence.
+If 9 < n, say `ab` are its two leading digits, so that if `n = 583`,
+`a = 5`, and `b = 8`. If `n < 10` then `a = n`. Let `k` be the number of
+digits of `n`, so that if `n = 583`, `k = 3`. `n` is in the sequence if
+any of these hold:
+
+* `a = 2` and `k = 1, 3, 4, 6, 7, 9`;
+* `ab = 10, 12, 16, 17, 18, 19` and `k = 2, 5, 8`.
+
+Please notice that standard loopholes are forbidden by default, in
+particular trivialising the challenge by using a language with a
+trivial numeric type.
+
+## Solution
+
+### [Perl][perl]
+
+Due to the `-F` option, the input is split on characters which are
+put in the array `@F`. So, if we use `@F` in scalar context, we
+have the length of the number.
+
+First, we set `$x` to true if the number contains 2, 5, or 8 digits
+(it's given the number is at most 9 digits).
+
+The rest is straightforward. We check whether the number starts
+with `2`, and does not contain 2, 5, or 8 digits, or whether it
+starts with `10`, `12`, `16`, `17`, `18`, or `19`, and contains 2,
+5 or 8 digits.
+
+Solution uses suggestions from Dom Hastings.
+
+[challenge]: https://codegolf.stackexchange.com/questions/213664/a-portuguese-sequence-of-integers
+[perl]: https://tio.run/##PVBBagMxDLzrF4Ult2BJtmyLstBTPhGSnnoohGZpe9hDydOzlb22DR7skT0azfLxfZNtm9b57TQ/3JklX9zr9D67K7vDy7T@uSudkeNRL@4wrdvGQAhkGIESUAZSYETbBMweWKyAtgypYqiMqtq3yjPlgsyGUcQwqRrmFA0Vq1qVYHvlqWgqWhvVqoL72kWH7i7dmdiZKJF9EDv0Uuql1JncmdwZ7Yw2pnXYrVEQ9lJOo0q9GsS6kfjmtqqBhwACERJksDsBeaAAVDRgT6m6r4arNW/BZrEnWqRaGF64zdoGbMO0CZrt4XUkhSMhHMngCAJHADgGR@ju9Xlffj/vXz/bcbmd/gE
